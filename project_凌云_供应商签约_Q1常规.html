@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>供应商签约（Q1常规） · 2026Q1 OKR Review</title>
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --subtext: #555577;
+      --accent: #4f46e5;
+      --accent-light: #eef2ff;
+      --border: #e2e8f0;
+      --s1: #4f46e5; /* 完成情况 */
+      --s2: #ef4444; /* 问题 */
+      --s3: #10b981; /* 下季度计划 */
+      --s4: #f59e0b; /* 管理者反馈 */
+      --s1-bg: #eef2ff;
+      --s2-bg: #fef2f2;
+      --s3-bg: #ecfdf5;
+      --s4-bg: #fffbeb;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f1a;
+        --card-bg: #1a1a2e;
+        --text: #e2e8f0;
+        --subtext: #94a3b8;
+        --accent: #818cf8;
+        --accent-light: #1e1b4b;
+        --border: #2d2d4e;
+        --s1-bg: #1e1b4b;
+        --s2-bg: #450a0a;
+        --s3-bg: #064e3b;
+        --s4-bg: #451a03;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* Header */
+    .header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .back-link {
+      color: var(--subtext);
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .back-link:hover { color: var(--accent); }
+    .header-divider { color: var(--border); }
+    .header-crumb {
+      font-size: 0.85rem;
+      color: var(--subtext);
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 40px 28px;
+    }
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .hero-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .hero-meta {
+      margin-top: 6px;
+      font-size: 0.88rem;
+      color: var(--subtext);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 4px; }
+    .score-big {
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .score-good { background: #d1fae5; color: #065f46; }
+    .score-mid  { background: #fef3c7; color: #92400e; }
+    .score-low  { background: #fee2e2; color: #991b1b; }
+    .score-none { background: var(--accent-light); color: var(--accent); }
+    @media (prefers-color-scheme: dark) {
+      .score-good { background: #064e3b; color: #6ee7b7; }
+      .score-mid  { background: #451a03; color: #fcd34d; }
+      .score-low  { background: #450a0a; color: #fca5a5; }
+      .score-none { background: #1e1b4b; color: #818cf8; }
+    }
+    .score-label { font-size: 0.7rem; font-weight: 500; opacity: 0.7; margin-top: 2px; }
+
+    /* Main content */
+    .main {
+      max-width: 860px;
+      margin: 32px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Section card */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .section-body {
+      padding: 20px;
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.75;
+      white-space: pre-line;
+    }
+
+    /* Color variants */
+    .s1 .section-header { background: var(--s1-bg); }
+    .s1 .section-dot    { background: var(--s1); }
+    .s1 .section-title  { color: var(--s1); }
+
+    .s2 .section-header { background: var(--s2-bg); }
+    .s2 .section-dot    { background: var(--s2); }
+    .s2 .section-title  { color: var(--s2); }
+
+    .s3 .section-header { background: var(--s3-bg); }
+    .s3 .section-dot    { background: var(--s3); }
+    .s3 .section-title  { color: var(--s3); }
+
+    .s4 .section-header { background: var(--s4-bg); }
+    .s4 .section-dot    { background: var(--s4); }
+    .s4 .section-title  { color: var(--s4); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      color: var(--subtext);
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <a class="back-link" href="index.html">← 返回总览</a>
+  <span class="header-divider">/</span>
+  <span class="header-crumb">2026Q1 · 供应商签约（Q1常规）</span>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-title">供应商签约（Q1常规）</div>
+      <div class="hero-meta">
+        <span>👤 凌云</span>
+        <span>📅 2026-03-17</span>
+        <span>🗂 2026Q1</span>
+      </div>
+    </div>
+    
+      <div class="score-big score-none">
+        —
+        <div class="score-label">暂无评分</div>
+      </div>
+    
+  </div>
+</div>
+
+<main class="main">
+
+  <!-- 本季度 OKR 完成情况 -->
+  <div class="section-card s1">
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">本季度 OKR 完成情况</div>
+    </div>
+    <div class="section-body">Q1签约供应商特别多
+签约类型：作曲（偏多）、混音、歌手
+微风音（音效供应商做音乐）：项目组用下来还不错，价格6800元/首（两档6800和9000多，统一按6800结算）
+新混音供应商：昨天刚签完，欣桐明天给发混音包测试</div>
+  </div>
+
+  <!-- 遇到的问题 -->
+  <div class="section-card s2">
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">遇到的问题</div>
+    </div>
+    <div class="section-body">微风音价格偏贵（6800），之前沟通希望便宜些，已降了一点
+英文供应商寻找似乎没有进展</div>
+  </div>
+
+  <!-- 下季度计划 -->
+  <div class="section-card s3">
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">下季度计划</div>
+    </div>
+    <div class="section-body">微风音价格将来可能还可以再低
+如果再低一点更多项目可以用（如麦芬需要4800的价位）
+随着AI音乐发展外包商价格可能下降
+新混音供应商测试结果待看</div>
+  </div>
+
+  <!-- 管理者反馈 -->
+  <div class="section-card s4">
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">管理者反馈</div>
+    </div>
+    <div class="section-body">微风音价不廉物还可以，总体偏贵但之前已聊过，估计降了一点
+如果再便宜些很多项目都能用，麦芬也能用
+随着AI音乐越来越多，外包商都岌岌可危
+新混音供应商看看混的怎么样</div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-17 17:08
+</footer>
+
+</body>
+</html>
