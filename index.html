@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-19 18:17</span>
+    <span>生成于 2026-03-19 18:35</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-19 18:17
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-19 18:35
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-19 18:17";
+    const VERSION = "2026-03-19 18:35";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1667,29 +1667,65 @@
 
 
 <style>
-#annot-bubble{position:fixed;background:#4f46e5;color:#fff;padding:6px 12px;border-radius:20px;font-size:0.82rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);display:none;z-index:9000;white-space:nowrap;}
-#annot-bubble:hover{background:#4338ca;}
-#annot-form{position:fixed;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;width:300px;box-shadow:0 8px 24px rgba(0,0,0,0.12);display:none;z-index:9001;}
-#annot-form .af-quote{font-size:0.78rem;color:#64748b;background:#f8fafc;border-left:3px solid #4f46e5;padding:6px 10px;border-radius:4px;margin-bottom:10px;max-height:60px;overflow:hidden;}
+/* 右侧评论面板 */
+#annot-sidebar{position:fixed;right:0;top:0;width:268px;height:100vh;background:#fff;border-left:1px solid #e2e8f0;display:flex;flex-direction:column;z-index:200;transform:translateX(100%);transition:transform 0.2s;}
+#annot-sidebar.open{transform:translateX(0);}
+#annot-sidebar-head{padding:14px 16px;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+#annot-sidebar-head h3{font-size:0.9rem;font-weight:700;color:var(--text);margin:0;}
+#annot-sidebar-close{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--subtext);padding:2px 6px;}
+#annot-sidebar-close:hover{color:var(--text);}
+#annot-list{flex:1;overflow-y:auto;padding:8px 0;}
+#annot-sidebar-foot{padding:12px 16px;border-top:1px solid #e2e8f0;flex-shrink:0;}
+#annot-export-btn{width:100%;background:#4f46e5;color:#fff;border:none;border-radius:8px;padding:8px;font-size:0.82rem;cursor:pointer;}
+#annot-export-btn:hover{background:#4338ca;}
+
+/* 评论条目 */
+.annot-item{padding:12px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;transition:background 0.1s;}
+.annot-item:hover{background:#f8fafc;}
+.annot-item.active{background:#fef9c3;border-left:3px solid #f59e0b;}
+.annot-item .ai-quote{font-size:0.74rem;color:#92400e;font-style:italic;margin-bottom:5px;line-height:1.5;}
+.annot-item .ai-comment{font-size:0.84rem;color:var(--text);line-height:1.6;}
+.annot-item .ai-meta{font-size:0.72rem;color:#94a3b8;margin-top:5px;display:flex;justify-content:space-between;align-items:center;}
+.annot-item .ai-del{color:#cbd5e1;cursor:pointer;font-size:0.8rem;}
+.annot-item .ai-del:hover{color:#ef4444;}
+
+/* 文字高亮 */
+.annot-mark{background:#fef08a;border-radius:2px;cursor:pointer;transition:background 0.15s;}
+.annot-mark:hover{background:#fde047;}
+.annot-mark.active{background:#fb923c;color:#fff;border-radius:3px;}
+
+/* 浮动气泡 */
+#annot-bubble{position:fixed;background:#1e293b;color:#fff;padding:5px 12px;border-radius:16px;font-size:0.8rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);display:none;z-index:9000;white-space:nowrap;}
+#annot-bubble:hover{background:#334155;}
+
+/* 评论输入框 */
+#annot-form{position:fixed;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;width:288px;box-shadow:0 8px 24px rgba(0,0,0,0.12);display:none;z-index:9001;}
+#annot-form .af-quote{font-size:0.78rem;color:#64748b;background:#fef9c3;border-left:3px solid #f59e0b;padding:6px 10px;border-radius:4px;margin-bottom:10px;}
 #annot-form input,#annot-form textarea{width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:0.83rem;outline:none;box-sizing:border-box;font-family:inherit;}
 #annot-form input:focus,#annot-form textarea:focus{border-color:#4f46e5;}
 #annot-form textarea{resize:vertical;min-height:70px;margin-top:8px;}
 #annot-form .af-actions{display:flex;gap:8px;margin-top:10px;justify-content:flex-end;}
 #annot-form .af-btn{padding:5px 14px;border-radius:6px;font-size:0.82rem;cursor:pointer;border:none;}
 #annot-form .af-submit{background:#4f46e5;color:#fff;}
-#annot-form .af-submit:hover{background:#4338ca;}
 #annot-form .af-cancel{background:#f1f5f9;color:#64748b;}
-#annot-panel{position:fixed;bottom:20px;right:20px;z-index:8999;}
-#annot-export{background:#4f46e5;color:#fff;border:none;border-radius:20px;padding:8px 16px;font-size:0.82rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);display:none;}
-#annot-export:hover{background:#4338ca;}
-#annot-count{background:#ef4444;color:#fff;border-radius:10px;padding:1px 6px;font-size:0.72rem;margin-left:4px;display:none;}
-.annot-note{position:absolute;background:#fef9c3;border:1px solid #fde047;border-radius:8px;padding:10px 12px 10px 14px;font-size:0.78rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);width:200px;z-index:100;line-height:1.5;}
-.annot-note .an-quote{color:#92400e;font-style:italic;margin-bottom:4px;font-size:0.74rem;}
-.annot-note .an-author{color:#64748b;font-size:0.72rem;margin-top:4px;}
-.annot-note .an-del{position:absolute;top:4px;right:6px;cursor:pointer;color:#94a3b8;font-size:0.8rem;}
-.annot-note .an-del:hover{color:#ef4444;}
+
+/* 打开面板按钮 */
+#annot-toggle{position:fixed;right:0;bottom:80px;background:#4f46e5;color:#fff;border:none;border-radius:8px 0 0 8px;padding:10px 8px;cursor:pointer;z-index:199;display:none;writing-mode:vertical-rl;font-size:0.78rem;letter-spacing:0.05em;}
+#annot-toggle:hover{background:#4338ca;}
 </style>
 
+<!-- 右侧面板 -->
+<div id="annot-sidebar">
+  <div id="annot-sidebar-head">
+    <h3>💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span></h3>
+    <button id="annot-sidebar-close" onclick="annotSidebarClose()">✕</button>
+  </div>
+  <div id="annot-list"></div>
+  <div id="annot-sidebar-foot"></div>
+</div>
+<button id="annot-toggle" onclick="annotSidebarOpen()">评论</button>
+
+<!-- 浮动气泡 & 输入框 -->
 <div id="annot-bubble">💬 添加评论</div>
 <div id="annot-form">
   <div class="af-quote" id="af-quote"></div>
@@ -1700,33 +1736,46 @@
     <button class="af-btn af-submit" onclick="annotSubmit()">确认</button>
   </div>
 </div>
-<div id="annot-panel">
-  <button id="annot-export" onclick="annotExport()">📋 复制所有反馈 <span id="annot-count"></span></button>
-</div>
 
 <script>
 (function(){
   const annotations = [];
   let pendingSel = null;
 
+  // ── 侧边栏开关 ──
+  function annotSidebarOpen(){
+    document.getElementById('annot-sidebar').classList.add('open');
+    document.getElementById('annot-toggle').style.display = 'none';
+  }
+  window.annotSidebarClose = function(){
+    document.getElementById('annot-sidebar').classList.remove('open');
+    if(annotations.length) document.getElementById('annot-toggle').style.display = 'block';
+    deactivateAll();
+  };
+
+  // ── 选文字显示气泡 ──
   document.addEventListener('mouseup', function(e){
     if(document.getElementById('annot-form').contains(e.target)) return;
+    if(document.getElementById('annot-sidebar').contains(e.target)) return;
     const sel = window.getSelection();
     const txt = sel ? sel.toString().trim() : '';
     if(txt.length < 2){ hideBubble(); return; }
     pendingSel = { text: txt, range: sel.getRangeAt(0).cloneRange() };
     const rect = sel.getRangeAt(0).getBoundingClientRect();
-    showBubble(rect.left + rect.width/2, rect.top + window.scrollY - 40);
-  });
-
-  function showBubble(x, y){
     const b = document.getElementById('annot-bubble');
     b.style.display = 'block';
-    b.style.left = Math.max(10, x - 60) + 'px';
-    b.style.top = y + 'px';
-  }
+    b.style.left = Math.min(window.innerWidth - 140, rect.left + rect.width/2 - 60) + 'px';
+    b.style.top = (rect.top - 36) + 'px';
+  });
   function hideBubble(){ document.getElementById('annot-bubble').style.display = 'none'; }
+  document.addEventListener('mousedown', function(e){
+    if(!document.getElementById('annot-bubble').contains(e.target) &&
+       !document.getElementById('annot-form').contains(e.target)){
+      hideBubble();
+    }
+  });
 
+  // ── 打开输入框 ──
   document.getElementById('annot-bubble').onclick = function(){
     hideBubble();
     if(!pendingSel) return;
@@ -1736,11 +1785,12 @@
     const rect = pendingSel.range.getBoundingClientRect();
     const form = document.getElementById('annot-form');
     form.style.display = 'block';
-    let top = rect.bottom + window.scrollY + 8;
+    let top = rect.bottom + 8;
     let left = rect.left;
-    if(left + 310 > window.innerWidth) left = window.innerWidth - 320;
+    if(left + 300 > window.innerWidth - 280) left = rect.left - 300;
+    left = Math.max(10, left);
     form.style.top = top + 'px';
-    form.style.left = Math.max(10,left) + 'px';
+    form.style.left = left + 'px';
     document.getElementById('af-text').focus();
   };
 
@@ -1750,157 +1800,92 @@
     window.getSelection().removeAllRanges();
   };
 
+  // ── 提交评论 ──
   window.annotSubmit = function(){
     const comment = document.getElementById('af-text').value.trim();
     if(!comment){ document.getElementById('af-text').focus(); return; }
     const name = document.getElementById('af-name').value.trim() || '匿名';
     const quote = pendingSel.text;
     const id = 'an-' + Date.now();
-    annotations.push({ id, quote, comment, name, time: new Date().toLocaleString('zh-CN'), range: pendingSel.range });
-    placeNote(id, quote, comment, name, pendingSel.range);
+    // 高亮原文
+    let marked = false;
+    try {
+      const span = document.createElement('span');
+      span.className = 'annot-mark';
+      span.dataset.annotId = id;
+      span.onclick = () => activateAnnotation(id);
+      pendingSel.range.surroundContents(span);
+      marked = true;
+    } catch(e){ /* 跨元素选区，跳过高亮 */ }
+    const annotData = { id, quote, comment, name, time: new Date().toLocaleString('zh-CN'), marked };
+    annotations.push(annotData);
+    // 保存到本地 server.py（仅本地运行时有效）
+    fetch('http://localhost:9173/annotate', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(annotData)
+    }).catch(() => {}); // 发布版静默失败
     document.getElementById('annot-form').style.display = 'none';
     pendingSel = null;
     window.getSelection().removeAllRanges();
-    updateExportBtn();
+    renderPanel();
+    annotSidebarOpen();
+    setTimeout(() => activateAnnotation(id), 100);
   };
 
-  function ensureArrowSVG(){
-    let svg = document.getElementById('annot-arrows');
-    if(!svg){
-      svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-      svg.id = 'annot-arrows';
-      svg.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;z-index:98;overflow:visible;';
-      svg.style.width = '1px'; svg.style.height = '1px';
-      const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
-      const marker = document.createElementNS('http://www.w3.org/2000/svg','marker');
-      marker.setAttribute('id','annot-arrowhead');
-      marker.setAttribute('markerWidth','10'); marker.setAttribute('markerHeight','7');
-      marker.setAttribute('refX','9'); marker.setAttribute('refY','3.5');
-      marker.setAttribute('orient','auto');
-      const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-      poly.setAttribute('points','0 0,10 3.5,0 7'); poly.setAttribute('fill','#d97706');
-      marker.appendChild(poly); defs.appendChild(marker); svg.appendChild(defs);
-      document.body.appendChild(svg);
-    }
-    return svg;
+  // ── 激活联动高亮 ──
+  function deactivateAll(){
+    document.querySelectorAll('.annot-mark.active').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.annot-item.active').forEach(el => el.classList.remove('active'));
+  }
+  function activateAnnotation(id){
+    deactivateAll();
+    const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
+    if(mark){ mark.classList.add('active'); mark.scrollIntoView({ behavior:'smooth', block:'center' }); }
+    const item = document.getElementById('ai-' + id);
+    if(item){ item.classList.add('active'); item.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
   }
 
-  function drawArrow(id, noteEl, targetRect, lineLeft){
-    const svg = ensureArrowSVG();
-    const x1 = parseInt(noteEl.style.left) + noteEl.offsetWidth;
-    const y1 = parseInt(noteEl.style.top) + noteEl.offsetHeight / 2;
-    const x2 = lineLeft !== undefined ? lineLeft : targetRect.left + window.scrollX - 8;
-    const y2 = targetRect.top + window.scrollY + targetRect.height / 2;
-    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.id = 'arrow-' + id;
-    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-    line.setAttribute('x2', x2 - 6); line.setAttribute('y2', y2);
-    line.setAttribute('stroke','#d97706'); line.setAttribute('stroke-width','2');
-    line.setAttribute('stroke-dasharray','6,3');
-    line.setAttribute('marker-end','url(#annot-arrowhead)');
-    svg.appendChild(line);
-  }
-
-  function getLineLeft(node){
-    // 向上找到块级元素，然后找其内第一个字符的实际 X 位置
-    const BLOCK = ['LI','P','DIV','H1','H2','H3','H4'];
-    let el = node.nodeType === 3 ? node.parentElement : node;
-    while(el && !BLOCK.includes(el.tagName)) el = el.parentElement;
-    if(!el) el = node.nodeType === 3 ? node.parentElement : node;
-    // 找第一个非空文本节点
-    function firstTextNode(n){
-      if(n.nodeType === 3 && n.textContent.trim()) return n;
-      for(let c of n.childNodes){ const r = firstTextNode(c); if(r) return r; }
-      return null;
-    }
-    const tn = firstTextNode(el);
-    if(tn){
-      const r = document.createRange();
-      r.setStart(tn, 0); r.setEnd(tn, 1);
-      return r.getBoundingClientRect().left + window.scrollX - 4;
-    }
-    return el.getBoundingClientRect().left + window.scrollX;
-  }
-
-  function placeNote(id, quote, comment, name, range){
-    const rect = range.getBoundingClientRect();
-    const lineLeft = getLineLeft(range.startContainer);
-    const noteW = 200;
-    const margin = 80;
-    let left = Math.max(8, lineLeft - noteW - margin);
-    let top = rect.top + window.scrollY - 10;
-    document.querySelectorAll('.annot-note').forEach(el => {
-      const elTop = parseInt(el.style.top);
-      if(Math.abs(elTop - top) < 90) top = elTop + 94;
+  // ── 渲染面板 ──
+  function renderPanel(){
+    const list = document.getElementById('annot-list');
+    list.innerHTML = annotations.length ? '' : '<div style="padding:24px 16px;text-align:center;color:#94a3b8;font-size:0.85rem;">暂无评论</div>';
+    annotations.forEach((a, i) => {
+      const div = document.createElement('div');
+      div.className = 'annot-item';
+      div.id = 'ai-' + a.id;
+      div.onclick = () => activateAnnotation(a.id);
+      div.innerHTML = `<div class="ai-quote">"${a.quote.slice(0,50)}${a.quote.length>50?'…':''}"</div><div class="ai-comment">${a.comment}</div><div class="ai-meta"><span>${a.name} · ${a.time}</span><span class="ai-del" onclick="event.stopPropagation();annotDel('${a.id}')">删除</span></div>`;
+      list.appendChild(div);
     });
-    const note = document.createElement('div');
-    note.className = 'annot-note';
-    note.id = id;
-    note.style.top = top + 'px';
-    note.style.left = left + 'px';
-    note.innerHTML = `<span class="an-del" onclick="annotDel('${id}')">✕</span><div class="an-quote">${quote.slice(0,60)}${quote.length>60?'…':''}</div><div>${comment}</div><div class="an-author">— ${name}</div>`;
-    document.body.appendChild(note);
-    // 箭头终点跳过项目符号（约55px），不遮挡•
-    requestAnimationFrame(() => drawArrow(id, note, rect, lineLeft));
+    const badge = document.getElementById('annot-badge');
+    badge.style.display = annotations.length ? 'inline' : 'none';
+    badge.textContent = annotations.length;
+    document.getElementById('annot-sidebar-foot').style.display = annotations.length ? 'block' : 'none';
+    document.getElementById('annot-toggle').style.display = annotations.length && !document.getElementById('annot-sidebar').classList.contains('open') ? 'block' : 'none';
   }
 
+  // ── 删除 ──
   window.annotDel = function(id){
-    const idx = annotations.findIndex(a=>a.id===id);
-    if(idx>-1) annotations.splice(idx,1);
-    const el = document.getElementById(id);
-    if(el) el.remove();
-    const arrow = document.getElementById('arrow-'+id);
-    if(arrow) arrow.remove();
-    updateExportBtn();
+    const idx = annotations.findIndex(a => a.id === id);
+    if(idx > -1) annotations.splice(idx, 1);
+    const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
+    if(mark){ const parent = mark.parentNode; while(mark.firstChild) parent.insertBefore(mark.firstChild, mark); parent.removeChild(mark); }
+    renderPanel();
   };
 
-  // 窗口缩放时重新定位所有便利贴
-  function repositionAll(){
-    annotations.forEach(a => {
-      const note = document.getElementById(a.id);
-      const arrowLine = document.getElementById('arrow-'+a.id);
-      if(!note || !a.range) return;
-      try {
-        const rect = a.range.getBoundingClientRect();
-        const lineLeft = getLineLeft(a.range.startContainer);
-        const noteW = 200, margin = 80;
-        const left = Math.max(8, lineLeft - noteW - margin);
-        const top = rect.top + window.scrollY - 10;
-        note.style.left = left + 'px';
-        note.style.top = top + 'px';
-        if(arrowLine){
-          const x1 = left + note.offsetWidth;
-          const y1 = top + note.offsetHeight / 2;
-          const x2 = lineLeft;
-          const y2 = rect.top + window.scrollY + rect.height / 2;
-          arrowLine.setAttribute('x1', x1); arrowLine.setAttribute('y1', y1);
-          arrowLine.setAttribute('x2', x2); arrowLine.setAttribute('y2', y2);
-        }
-      } catch(e){}
-    });
-  }
-  let _resizeTimer;
-  window.addEventListener('resize', () => { clearTimeout(_resizeTimer); _resizeTimer = setTimeout(repositionAll, 150); });
-
-  function updateExportBtn(){
-    const btn = document.getElementById('annot-export');
-    const cnt = document.getElementById('annot-count');
-    btn.style.display = annotations.length ? 'inline-block' : 'none';
-    cnt.style.display = annotations.length ? 'inline' : 'none';
-    cnt.textContent = annotations.length;
-  }
-
+  // ── 导出 ──
   window.annotExport = function(){
-    const lines = annotations.map((a,i)=>
+    const lines = annotations.map((a,i) =>
       `【反馈 ${i+1}】${a.name} · ${a.time}\n原文："${a.quote}"\n评论：${a.comment}`
     ).join('\n\n');
-    navigator.clipboard.writeText(lines).then(()=>{
-      const btn = document.getElementById('annot-export');
-      const orig = btn.innerHTML;
-      btn.innerHTML = '✅ 已复制！';
-      setTimeout(()=>{ btn.innerHTML = orig; }, 2000);
+    navigator.clipboard.writeText(lines).then(() => {
+      const btn = document.getElementById('annot-export-btn');
+      btn.textContent = '✅ 已复制！';
+      setTimeout(() => { btn.textContent = '📋 复制所有反馈'; }, 2000);
     });
   };
+
+  renderPanel();
 })();
 </script>
 
