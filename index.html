@@ -1741,7 +1741,7 @@
 <!-- 右侧面板 -->
 <div id="annot-sidebar">
   <div id="annot-sidebar-head">
-    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-fix-all" onclick="event.stopPropagation();annotCopyBugs()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #4f46e5;border-radius:10px;background:none;color:#4f46e5;cursor:pointer;">复制 Bug 给 Claude</button><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:4px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
+    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-fix-all" onclick="event.stopPropagation();annotFixAll()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #4f46e5;border-radius:10px;background:none;color:#4f46e5;cursor:pointer;">一键修复全部</button><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:4px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
     <button id="annot-sidebar-close" onclick="annotSidebarClose()">✕</button>
   </div>
   <div id="annot-list"></div>
@@ -2086,17 +2086,24 @@
     return fallback ? tryWrap(fallback, fallbackIdx, quote, id, cls) : false;
   }
 
-  // ── 清除所有已修复的 Bug ──
-  // ── 复制所有未修复的 Bug 给 Claude ──
-  window.annotCopyBugs = function(){
-    const bugs = annotations.filter(a => !a.fixed && a.type === 'bug');
+  // ── 一键修复全部未修复的 Bug ──
+  window.annotFixAll = function(){
+    const bugs = annotations.filter(a => !a.fixed && a.type === 'bug' && a.issueNum);
     if(!bugs.length) return;
-    const text = bugs.map((a,i) => `【Bug ${i+1}】原文："${a.quote}" → ${a.comment}`).join('\n');
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('annot-fix-all');
-      const orig = btn.textContent;
-      btn.textContent = '✅ 已复制！';
-      setTimeout(() => { btn.textContent = orig; }, 2000);
+    const btn = document.getElementById('annot-fix-all');
+    btn.textContent = '修复中…'; btn.style.pointerEvents = 'none';
+    let done = 0;
+    bugs.forEach(a => {
+      fetch('http://localhost:9173/api/fix-bug', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({issue: a.issueNum})
+      })
+      .then(r => r.json())
+      .then(data => {
+        if(data.ok){ a.fixed = true; const mark = document.querySelector(`.annot-mark[data-annot-id="${a.id}"]`); if(mark) mark.className = 'annot-mark fixed'; }
+        if(++done === bugs.length){ renderPanel(); btn.style.pointerEvents = ''; }
+      })
+      .catch(() => { if(++done === bugs.length){ btn.textContent = '❌ Server未启动'; btn.style.pointerEvents = ''; } });
     });
   };
 
