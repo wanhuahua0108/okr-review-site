@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 16:22</span>
+    <span>生成于 2026-03-20 16:25</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 16:22
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 16:25
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 16:22";
+    const VERSION = "2026-03-20 16:25";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1929,16 +1929,11 @@
     const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
     if(mark){ const parent = mark.parentNode; while(mark.firstChild) parent.insertBefore(mark.firstChild, mark); parent.removeChild(mark); }
     renderPanel();
-    // 同步关闭 GitHub Issue
+    // 记录已删除的 Issue 编号到 localStorage（防止刷新后重新加载）
     const issueNum = a && a.issueNum;
     if(issueNum){
-      const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
-      const _k = _r.split('').reverse().join('');
-      fetch('https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/' + issueNum, {
-        method: 'PATCH',
-        headers: { 'Authorization': 'Bearer ' + _k, 'Content-Type': 'application/json', 'User-Agent': 'OKR-Annotator' },
-        body: JSON.stringify({ state: 'closed' })
-      }).catch(() => {});
+      const deleted = JSON.parse(localStorage.getItem('annot_deleted') || '[]');
+      if(!deleted.includes(issueNum)){ deleted.push(issueNum); localStorage.setItem('annot_deleted', JSON.stringify(deleted)); }
     }
   };
 
@@ -1992,7 +1987,9 @@
     .then(r => r.json())
     .then(issues => {
       if(!Array.isArray(issues)) return;
+      const deleted = JSON.parse(localStorage.getItem('annot_deleted') || '[]');
       issues.reverse().forEach(issue => {
+        if(deleted.includes(issue.number)) return; // 跳过已删除
         const body = issue.body || '';
         const quote   = (body.match(/\*\*原文：\*\* (.+)/) || [])[1] || '';
         const comment = (body.match(/\*\*评论：\*\* (.+)/) || [])[1] || '';
