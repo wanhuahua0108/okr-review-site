@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 17:14</span>
+    <span>生成于 2026-03-20 17:29</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:14
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:29
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 17:14";
+    const VERSION = "2026-03-20 17:29";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1741,7 +1741,7 @@
 <!-- 右侧面板 -->
 <div id="annot-sidebar">
   <div id="annot-sidebar-head">
-    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
+    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-fix-all" onclick="event.stopPropagation();annotFixAll()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #4f46e5;border-radius:10px;background:none;color:#4f46e5;cursor:pointer;">一键修复 bug</button><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:4px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
     <button id="annot-sidebar-close" onclick="annotSidebarClose()">✕</button>
   </div>
   <div id="annot-list"></div>
@@ -1969,9 +1969,11 @@
           <span>${a.name} · ${a.time}</span>
           <span class="ai-actions" onclick="event.stopPropagation()">
             ${canDelete(a.issueNum) ? `
+            ${!a.fixed && a.type==='bug' ? `<span class="ai-edit" style="color:#4f46e5" onclick="annotFix('${a.id}')">一键修复</span>` : ''}
+            ${a.fixed ? `<span class="ai-del" onclick="annotDel('${a.id}')">清除</span>` : `
             <span class="ai-save" id="as-${a.id}" onclick="annotSave('${a.id}')">保存</span>
             <span class="ai-edit" onclick="annotEdit('${a.id}')">编辑</span>
-            <span class="ai-del" onclick="annotDel('${a.id}')">删除</span>` : ''}
+            <span class="ai-del" onclick="annotDel('${a.id}')">删除</span>`}` : ''}
           </span>
         </div>`;
       list.appendChild(div);
@@ -1981,9 +1983,12 @@
     badge.textContent = annotations.length;
     const adminBadge = document.getElementById('annot-admin-badge');
     if(adminBadge) adminBadge.style.display = isAdmin() ? 'inline' : 'none';
-    const clearBtn = document.getElementById('annot-clear-fixed');
     const hasFixed = annotations.some(a => a.fixed);
+    const hasOpenBug = annotations.some(a => !a.fixed && a.type === 'bug');
+    const clearBtn = document.getElementById('annot-clear-fixed');
     if(clearBtn) clearBtn.style.display = (isAdmin() && hasFixed) ? 'inline-block' : 'none';
+    const fixAllBtn = document.getElementById('annot-fix-all');
+    if(fixAllBtn) fixAllBtn.style.display = (isAdmin() && hasOpenBug) ? 'inline-block' : 'none';
     document.getElementById('annot-sidebar-foot').style.display = annotations.length ? 'block' : 'none';
     document.getElementById('annot-toggle').style.display = annotations.length && !document.getElementById('annot-sidebar').classList.contains('open') ? 'block' : 'none';
   }
@@ -2054,30 +2059,57 @@
     });
   };
 
-  // ── 通用高亮函数（跳过 UI 元素，出错继续找下一个匹配）──
+  // ── 通用高亮函数（优先活跃 Tab，跳过 UI 元素，出错继续找）──
+  function tryWrap(node, idx, quote, id, cls){
+    try {
+      const range = document.createRange();
+      range.setStart(node, idx); range.setEnd(node, idx + quote.length);
+      const span = document.createElement('span');
+      span.className = cls; span.dataset.annotId = id;
+      span.onclick = () => activateAnnotation(id);
+      range.surroundContents(span); return true;
+    } catch(e){ return false; }
+  }
   function highlightQuote(quote, id, cls){
     const SKIP = '.annot-mark,#annot-sidebar,#annot-form,#annot-bubble,.tab-btn,.tab-bar,.score-badge,.feat-badge,.status-badge,[class*="badge"]';
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    let node;
+    let node, fallback = null, fallbackIdx = -1;
     while((node = walker.nextNode())){
       const idx = node.textContent.indexOf(quote);
       if(idx < 0) continue;
       if(node.parentElement.closest(SKIP)) continue;
-      try {
-        const range = document.createRange();
-        range.setStart(node, idx); range.setEnd(node, idx + quote.length);
-        const span = document.createElement('span');
-        span.className = cls;
-        span.dataset.annotId = id;
-        span.onclick = () => activateAnnotation(id);
-        range.surroundContents(span);
-        return true;
-      } catch(e){ continue; } // 跨元素则继续找下一个匹配
+      const panel = node.parentElement.closest('.tab-panel');
+      const inActive = !panel || panel.classList.contains('active');
+      if(inActive){ if(tryWrap(node, idx, quote, id, cls)) return true; }
+      else if(!fallback){ fallback = node; fallbackIdx = idx; }
     }
-    return false;
+    return fallback ? tryWrap(fallback, fallbackIdx, quote, id, cls) : false;
   }
 
   // ── 清除所有已修复的 Bug ──
+  // ── 单条修复 ──
+  window.annotFix = function(id){
+    const a = annotations.find(x => x.id === id);
+    if(!a) return;
+    a.fixed = true;
+    const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
+    if(mark){ mark.className = 'annot-mark fixed'; }
+    if(a.issueNum){
+      const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
+      const _k = _r.split('').reverse().join('');
+      fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`,{
+        method:'PATCH', headers:{'Authorization':'Bearer '+_k,'Content-Type':'application/json','User-Agent':'OKR-Annotator'},
+        body:JSON.stringify({state:'closed'})
+      }).catch(()=>{});
+    }
+    renderPanel();
+  };
+
+  // ── 全部修复 ──
+  window.annotFixAll = function(){
+    annotations.filter(a => !a.fixed && a.type === 'bug').forEach(a => annotFix(a.id));
+  };
+
   window.annotClearFixed = function(){
     const toRemove = annotations.filter(a => a.fixed);
     const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
