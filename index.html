@@ -2012,7 +2012,7 @@
       fetch('https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/' + issueNum, {
         method: 'PATCH',
         headers: { 'Authorization': 'Bearer ' + _k, 'Content-Type': 'application/json', 'User-Agent': 'OKR-Annotator' },
-        body: JSON.stringify({ state: 'closed' })
+        body: JSON.stringify({ state: 'closed', labels: ['annotation', 'user-deleted'] })
       }).catch(() => {});
     }
   };
