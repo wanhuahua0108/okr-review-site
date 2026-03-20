@@ -2100,15 +2100,31 @@
     });
   };
 
-  // ── 单条修复（仅改高亮颜色，内容已由 Claude 实际修改后 issue 才会关闭）──
+  // ── 单条修复：POST 到本地 server，自动修改内容并发布 ──
   window.annotFix = function(id){
     const a = annotations.find(x => x.id === id);
-    if(!a || a.fixed) return;
-    // 不自动标记已修复，仅复制这条 bug 给 Claude
-    const text = `原文："${a.quote}" → ${a.comment}`;
-    navigator.clipboard.writeText(text).then(() => {
-      const item = document.getElementById('ai-' + id);
-      if(item){ const btns = item.querySelectorAll('.ai-edit'); btns.forEach(b => { if(b.textContent==='一键修复'){ b.textContent='✅ 已复制'; setTimeout(()=>{ b.textContent='一键修复'; },2000); } }); }
+    if(!a || a.fixed || !a.issueNum) return;
+    const item = document.getElementById('ai-' + id);
+    const btn = item && [...item.querySelectorAll('.ai-edit')].find(b => b.textContent === '一键修复');
+    if(btn){ btn.textContent = '修复中…'; btn.style.pointerEvents = 'none'; }
+    fetch('http://localhost:9173/api/fix-bug', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({issue: a.issueNum})
+    })
+    .then(r => r.json())
+    .then(data => {
+      if(data.ok){
+        a.fixed = true;
+        const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
+        if(mark) mark.className = 'annot-mark fixed';
+        renderPanel();
+      } else {
+        if(btn){ btn.textContent = '❌ ' + (data.error||'失败'); btn.style.pointerEvents = ''; setTimeout(()=>{ btn.textContent='一键修复'; },3000); }
+      }
+    })
+    .catch(() => {
+      if(btn){ btn.textContent = '❌ Server未启动'; btn.style.pointerEvents = ''; setTimeout(()=>{ btn.textContent='一键修复'; },3000); }
     });
   };
 
