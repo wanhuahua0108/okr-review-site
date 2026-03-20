@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 17:29</span>
+    <span>生成于 2026-03-20 17:37</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:29
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:37
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 17:29";
+    const VERSION = "2026-03-20 17:37";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1741,7 +1741,7 @@
 <!-- 右侧面板 -->
 <div id="annot-sidebar">
   <div id="annot-sidebar-head">
-    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-fix-all" onclick="event.stopPropagation();annotFixAll()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #4f46e5;border-radius:10px;background:none;color:#4f46e5;cursor:pointer;">一键修复 bug</button><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:4px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
+    <h3 ondblclick="annotAdminLogin()" title="">💬 评论 <span id="annot-badge" style="background:#ef4444;color:#fff;border-radius:10px;padding:1px 7px;font-size:0.72rem;margin-left:4px;display:none;"></span><span id="annot-admin-badge" style="display:none;font-size:0.7rem;color:#4f46e5;margin-left:6px;">管理员</span><button id="annot-fix-all" onclick="event.stopPropagation();annotCopyBugs()" style="display:none;margin-left:8px;font-size:0.72rem;padding:2px 8px;border:1px solid #4f46e5;border-radius:10px;background:none;color:#4f46e5;cursor:pointer;">复制 Bug 给 Claude</button><button id="annot-clear-fixed" onclick="event.stopPropagation();annotClearFixed()" style="display:none;margin-left:4px;font-size:0.72rem;padding:2px 8px;border:1px solid #9333ea;border-radius:10px;background:none;color:#9333ea;cursor:pointer;">清除已修的 bug</button></h3>
     <button id="annot-sidebar-close" onclick="annotSidebarClose()">✕</button>
   </div>
   <div id="annot-list"></div>
@@ -2087,27 +2087,29 @@
   }
 
   // ── 清除所有已修复的 Bug ──
-  // ── 单条修复 ──
-  window.annotFix = function(id){
-    const a = annotations.find(x => x.id === id);
-    if(!a) return;
-    a.fixed = true;
-    const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
-    if(mark){ mark.className = 'annot-mark fixed'; }
-    if(a.issueNum){
-      const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
-      const _k = _r.split('').reverse().join('');
-      fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`,{
-        method:'PATCH', headers:{'Authorization':'Bearer '+_k,'Content-Type':'application/json','User-Agent':'OKR-Annotator'},
-        body:JSON.stringify({state:'closed'})
-      }).catch(()=>{});
-    }
-    renderPanel();
+  // ── 复制所有未修复的 Bug 给 Claude ──
+  window.annotCopyBugs = function(){
+    const bugs = annotations.filter(a => !a.fixed && a.type === 'bug');
+    if(!bugs.length) return;
+    const text = bugs.map((a,i) => `【Bug ${i+1}】原文："${a.quote}" → ${a.comment}`).join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('annot-fix-all');
+      const orig = btn.textContent;
+      btn.textContent = '✅ 已复制！';
+      setTimeout(() => { btn.textContent = orig; }, 2000);
+    });
   };
 
-  // ── 全部修复 ──
-  window.annotFixAll = function(){
-    annotations.filter(a => !a.fixed && a.type === 'bug').forEach(a => annotFix(a.id));
+  // ── 单条修复（仅改高亮颜色，内容已由 Claude 实际修改后 issue 才会关闭）──
+  window.annotFix = function(id){
+    const a = annotations.find(x => x.id === id);
+    if(!a || a.fixed) return;
+    // 不自动标记已修复，仅复制这条 bug 给 Claude
+    const text = `原文："${a.quote}" → ${a.comment}`;
+    navigator.clipboard.writeText(text).then(() => {
+      const item = document.getElementById('ai-' + id);
+      if(item){ const btns = item.querySelectorAll('.ai-edit'); btns.forEach(b => { if(b.textContent==='一键修复'){ b.textContent='✅ 已复制'; setTimeout(()=>{ b.textContent='一键修复'; },2000); } }); }
+    });
   };
 
   window.annotClearFixed = function(){
@@ -2122,11 +2124,11 @@
       if(a.issueNum){
         const deleted = JSON.parse(localStorage.getItem('annot_deleted')||'[]');
         if(!deleted.includes(a.issueNum)){ deleted.push(a.issueNum); localStorage.setItem('annot_deleted', JSON.stringify(deleted)); }
-        // 移除 bug 标签，让 closed issues 查询找不到它
-        fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}/labels/bug`, {
-          method: 'DELETE',
-          headers: { 'Authorization': 'Bearer ' + _k, 'User-Agent': 'OKR-Annotator' }
-        }).catch(() => {});
+        // 关闭 Issue 并加 user-deleted 标签，防止被当作"已修复"加载
+        fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`,{
+          method:'PATCH', headers:{'Authorization':'Bearer '+_k,'Content-Type':'application/json','User-Agent':'OKR-Annotator'},
+          body:JSON.stringify({state:'closed',labels:['annotation','user-deleted']})
+        }).catch(()=>{});
       }
     });
     renderPanel();
@@ -2159,7 +2161,7 @@
       });
       if(annotations.length) renderPanel();
       // 同时加载已关闭的 Issues（已修复的 Bug）
-      return fetch('https://api.github.com/repos/wanhuahua0108/okr-review-site/issues?labels=annotation,bug&state=closed&per_page=50', {
+      return fetch('https://api.github.com/repos/wanhuahua0108/okr-review-site/issues?labels=annotation&state=closed&per_page=50', {
         headers: { 'User-Agent': 'OKR-Annotator' }
       });
     })
@@ -2169,6 +2171,11 @@
       const deleted = JSON.parse(localStorage.getItem('annot_deleted') || '[]');
       closed.forEach(issue => {
         if(deleted.includes(issue.number)) return;
+        // 跳过用户主动删除的评论（有 user-deleted 标签）
+        const labels = (issue.labels || []).map(l => l.name);
+        if(labels.includes('user-deleted')) return;
+        // 只显示 bug 类型的已修复（feedback 不需要显示已修复状态）
+        if(!labels.includes('bug')) return;
         const body = issue.body || '';
         const quote   = (body.match(/\*\*原文：\*\* (.+)/) || [])[1] || '';
         const comment = (body.match(/\*\*评论：\*\* (.+)/) || [])[1] || '';
