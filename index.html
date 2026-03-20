@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 16:37</span>
+    <span>生成于 2026-03-20 16:41</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 16:37
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 16:41
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 16:37";
+    const VERSION = "2026-03-20 16:41";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1760,7 +1760,7 @@
   let pendingSel = null;
 
   // ── 权限控制 ──
-  const _pw = '7000'.split('').reverse().join(''); // 混淆存储
+  const _pw = '7000'; // 混淆存储（0007 反转）
   let _admin = localStorage.getItem('annot_admin') === '1';
   function isAdmin(){ return _admin; }
   function canDelete(issueNum){
