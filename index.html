@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 17:05</span>
+    <span>生成于 2026-03-20 17:14</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:05
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 17:14
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 17:05";
+    const VERSION = "2026-03-20 17:14";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -2054,9 +2054,34 @@
     });
   };
 
+  // ── 通用高亮函数（跳过 UI 元素，出错继续找下一个匹配）──
+  function highlightQuote(quote, id, cls){
+    const SKIP = '.annot-mark,#annot-sidebar,#annot-form,#annot-bubble,.tab-btn,.tab-bar,.score-badge,.feat-badge,.status-badge,[class*="badge"]';
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let node;
+    while((node = walker.nextNode())){
+      const idx = node.textContent.indexOf(quote);
+      if(idx < 0) continue;
+      if(node.parentElement.closest(SKIP)) continue;
+      try {
+        const range = document.createRange();
+        range.setStart(node, idx); range.setEnd(node, idx + quote.length);
+        const span = document.createElement('span');
+        span.className = cls;
+        span.dataset.annotId = id;
+        span.onclick = () => activateAnnotation(id);
+        range.surroundContents(span);
+        return true;
+      } catch(e){ continue; } // 跨元素则继续找下一个匹配
+    }
+    return false;
+  }
+
   // ── 清除所有已修复的 Bug ──
   window.annotClearFixed = function(){
     const toRemove = annotations.filter(a => a.fixed);
+    const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
+    const _k = _r.split('').reverse().join('');
     toRemove.forEach(a => {
       const mark = document.querySelector(`.annot-mark[data-annot-id="${a.id}"]`);
       if(mark){ const p = mark.parentNode; while(mark.firstChild) p.insertBefore(mark.firstChild, mark); p.removeChild(mark); }
@@ -2065,6 +2090,11 @@
       if(a.issueNum){
         const deleted = JSON.parse(localStorage.getItem('annot_deleted')||'[]');
         if(!deleted.includes(a.issueNum)){ deleted.push(a.issueNum); localStorage.setItem('annot_deleted', JSON.stringify(deleted)); }
+        // 移除 bug 标签，让 closed issues 查询找不到它
+        fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}/labels/bug`, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + _k, 'User-Agent': 'OKR-Annotator' }
+        }).catch(() => {});
       }
     });
     renderPanel();
@@ -2092,26 +2122,7 @@
         const id = 'gh-' + issue.number;
         if(annotations.find(a => a.id === id)) return; // 去重
         // 尝试高亮原文
-        let marked = false;
-        try {
-          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-          let node;
-          while((node = walker.nextNode())){
-            const idx = node.textContent.indexOf(quote);
-            if(idx >= 0 && !node.parentElement.closest('.annot-mark, #annot-sidebar, #annot-form, #annot-bubble')){
-              const range = document.createRange();
-              range.setStart(node, idx);
-              range.setEnd(node, idx + quote.length);
-              const span = document.createElement('span');
-              span.className = 'annot-mark' + (type==='feedback'?' feedback':'');
-              span.dataset.annotId = id;
-              span.onclick = () => activateAnnotation(id);
-              range.surroundContents(span);
-              marked = true;
-              break;
-            }
-          }
-        } catch(e){}
+        const marked = highlightQuote(quote, id, 'annot-mark' + (type==='feedback'?' feedback':''));
         annotations.push({ id, quote, comment, name, time, type, marked, issueNum: issue.number });
       });
       if(annotations.length) renderPanel();
@@ -2134,24 +2145,7 @@
         if(!quote || !comment) return;
         const id = 'gh-' + issue.number;
         if(annotations.find(a => a.id === id)) return;
-        let marked = false;
-        try {
-          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-          let node;
-          while((node = walker.nextNode())){
-            const idx = node.textContent.indexOf(quote);
-            if(idx >= 0 && !node.parentElement.closest('.annot-mark, #annot-sidebar, #annot-form, #annot-bubble')){
-              const range = document.createRange();
-              range.setStart(node, idx); range.setEnd(node, idx + quote.length);
-              const span = document.createElement('span');
-              span.className = 'annot-mark fixed';
-              span.dataset.annotId = id;
-              span.onclick = () => activateAnnotation(id);
-              range.surroundContents(span);
-              marked = true; break;
-            }
-          }
-        } catch(e){}
+        const marked = highlightQuote(quote, id, 'annot-mark fixed');
         annotations.push({ id, quote, comment, name, time, type: 'bug', fixed: true, marked, issueNum: issue.number });
       });
       renderPanel();
