@@ -297,7 +297,7 @@
     <p>会议日期：2026-03-17</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-20 11:48</span>
+    <span>生成于 2026-03-20 13:59</span>
     
   </div>
 </header>
@@ -1611,14 +1611,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 11:48
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-20 13:59
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-20 11:48";
+    const VERSION = "2026-03-20 13:59";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
@@ -1685,14 +1685,27 @@
 .annot-item.active{background:#fef9c3;border-left:3px solid #f59e0b;}
 .annot-item .ai-quote{font-size:0.74rem;color:#92400e;font-style:italic;margin-bottom:5px;line-height:1.5;}
 .annot-item .ai-comment{font-size:0.84rem;color:var(--text);line-height:1.6;}
-.annot-item .ai-meta{font-size:0.72rem;color:#94a3b8;margin-top:5px;display:flex;justify-content:space-between;align-items:center;}
-.annot-item .ai-del{color:#cbd5e1;cursor:pointer;font-size:0.8rem;}
+.annot-item .ai-comment[contenteditable="true"]{outline:none;background:#f8fafc;border-radius:4px;padding:2px 4px;cursor:text;}
+.annot-item .ai-type-row{display:flex;gap:6px;margin-top:8px;}
+.ai-type-btn{padding:2px 10px;border-radius:12px;font-size:0.74rem;font-weight:600;border:none;cursor:pointer;opacity:0.4;transition:opacity 0.15s;}
+.ai-type-btn.active{opacity:1;}
+.ai-type-bug{background:#fca5a5;color:#7f1d1d;}
+.ai-type-feedback{background:#bbf7d0;color:#15803d;}
+.annot-item .ai-meta{font-size:0.72rem;color:#94a3b8;margin-top:6px;display:flex;justify-content:space-between;align-items:center;}
+.annot-item .ai-actions{display:flex;gap:8px;}
+.annot-item .ai-edit,.annot-item .ai-del{color:#cbd5e1;cursor:pointer;font-size:0.8rem;}
+.annot-item .ai-edit:hover{color:#4f46e5;}
 .annot-item .ai-del:hover{color:#ef4444;}
+.annot-item .ai-save{color:#4f46e5;cursor:pointer;font-size:0.8rem;display:none;}
+.annot-item .ai-save:hover{color:#4338ca;}
 
 /* 文字高亮 */
 .annot-mark{background:#fef08a;border-radius:2px;cursor:pointer;transition:background 0.15s;}
 .annot-mark:hover{background:#fde047;}
 .annot-mark.active{background:#fb923c;color:#fff;border-radius:3px;}
+.annot-mark.feedback{background:#bbf7d0;}
+.annot-mark.feedback:hover{background:#86efac;}
+.annot-mark.feedback.active{background:#22c55e;color:#fff;}
 
 /* 浮动气泡 */
 #annot-bubble{position:fixed;background:#1e293b;color:#fff;padding:5px 12px;border-radius:16px;font-size:0.8rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);display:none;z-index:9000;white-space:nowrap;}
@@ -1731,6 +1744,10 @@
   <div class="af-quote" id="af-quote"></div>
   <input id="af-name" placeholder="你的名字（可选）" />
   <textarea id="af-text" placeholder="写下你的评论…"></textarea>
+  <div style="display:flex;gap:8px;margin-top:10px;" onclick="event.stopPropagation()">
+    <button id="af-type-bug" class="ai-type-btn ai-type-bug active" style="opacity:1" onclick="afSetType('bug')">🔴 Bug</button>
+    <button id="af-type-feedback" class="ai-type-btn ai-type-feedback" onclick="afSetType('feedback')">🟢 Feedback</button><span style="font-size:0.74rem;color:#94a3b8;margin-left:4px;align-self:center;">（二选一）</span>
+  </div>
   <div class="af-actions">
     <button class="af-btn af-cancel" onclick="annotCancel()">取消</button>
     <button class="af-btn af-submit" onclick="annotSubmit()">确认</button>
@@ -1776,12 +1793,20 @@
   });
 
   // ── 打开输入框 ──
+  window.afSetType = function(type){
+    document.getElementById('af-type-bug').classList.toggle('active', type==='bug');
+    document.getElementById('af-type-bug').style.opacity = type==='bug'?'1':'0.4';
+    document.getElementById('af-type-feedback').classList.toggle('active', type==='feedback');
+    document.getElementById('af-type-feedback').style.opacity = type==='feedback'?'1':'0.4';
+  };
+
   document.getElementById('annot-bubble').onclick = function(){
     hideBubble();
     if(!pendingSel) return;
     document.getElementById('af-quote').textContent = '"' + pendingSel.text.slice(0,80) + (pendingSel.text.length>80?'…':'') + '"';
     document.getElementById('af-name').value = '';
     document.getElementById('af-text').value = '';
+    afSetType('bug'); // 每次打开重置为 Bug
     const rect = pendingSel.range.getBoundingClientRect();
     const form = document.getElementById('annot-form');
     form.style.display = 'block';
@@ -1807,17 +1832,19 @@
     const name = document.getElementById('af-name').value.trim() || '匿名';
     const quote = pendingSel.text;
     const id = 'an-' + Date.now();
+    const type = document.getElementById('af-type-feedback').classList.contains('active') ? 'feedback' : 'bug';
     // 高亮原文
     let marked = false;
     try {
       const span = document.createElement('span');
-      span.className = 'annot-mark';
+      span.className = 'annot-mark' + (type === 'feedback' ? ' feedback' : '');
       span.dataset.annotId = id;
       span.onclick = () => activateAnnotation(id);
       pendingSel.range.surroundContents(span);
       marked = true;
     } catch(e){ /* 跨元素选区，跳过高亮 */ }
     const annotData = { id, quote, comment, name, time: new Date().toLocaleString('zh-CN'), marked };
+    annotData.type = type;
     annotations.push(annotData);
     // 保存到本地 server.py（本地运行时）
     fetch('http://localhost:9173/annotate', {
@@ -1832,9 +1859,9 @@
         method: 'POST',
         headers: { 'Authorization': 'Bearer ' + _k, 'Content-Type': 'application/json', 'User-Agent': 'OKR-Annotator' },
         body: JSON.stringify({
-          title: '\uD83D\uDCAC ' + annotData.name + '\uFF1A' + annotData.quote.slice(0,40),
-          body: '**\u539F\u6587\uFF1A** ' + annotData.quote + '\n\n**\u8BC4\u8BBA\uFF1A** ' + annotData.comment + '\n\n**\u6765\u81EA\uFF1A** ' + annotData.name + '\u3000**\u65F6\u95F4\uFF1A** ' + annotData.time,
-          labels: ['annotation']
+          title: (annotData.type==='bug'?'🔴':'🟢') + ' ' + annotData.name + '\uFF1A' + annotData.quote.slice(0,40),
+          body: '**\u7C7B\u578B\uFF1A** ' + (annotData.type==='bug'?'Bug':'Feedback') + '\n\n**\u539F\u6587\uFF1A** ' + annotData.quote + '\n\n**\u8BC4\u8BBA\uFF1A** ' + annotData.comment + '\n\n**\u6765\u81EA\uFF1A** ' + annotData.name + '\u3000**\u65F6\u95F4\uFF1A** ' + annotData.time,
+          labels: ['annotation', annotData.type==='bug'?'bug':'feedback']
         })
       }).catch(() => {});
     })();
@@ -1863,12 +1890,27 @@
   function renderPanel(){
     const list = document.getElementById('annot-list');
     list.innerHTML = annotations.length ? '' : '<div style="padding:24px 16px;text-align:center;color:#94a3b8;font-size:0.85rem;">暂无评论</div>';
-    annotations.forEach((a, i) => {
+    annotations.forEach((a) => {
       const div = document.createElement('div');
       div.className = 'annot-item';
       div.id = 'ai-' + a.id;
       div.onclick = () => activateAnnotation(a.id);
-      div.innerHTML = `<div class="ai-quote">"${a.quote.slice(0,50)}${a.quote.length>50?'…':''}"</div><div class="ai-comment">${a.comment}</div><div class="ai-meta"><span>${a.name} · ${a.time}</span><span class="ai-del" onclick="event.stopPropagation();annotDel('${a.id}')">删除</span></div>`;
+      const type = a.type || 'bug';
+      div.innerHTML = `
+        <div class="ai-quote">"${a.quote.slice(0,50)}${a.quote.length>50?'…':''}"</div>
+        <div class="ai-comment" id="ac-${a.id}">${a.comment}</div>
+        <div class="ai-type-row" onclick="event.stopPropagation()">
+          <button class="ai-type-btn ai-type-bug${type==='bug'?' active':''}" onclick="annotSetType('${a.id}','bug')">🔴 Bug</button>
+          <button class="ai-type-btn ai-type-feedback${type==='feedback'?' active':''}" onclick="annotSetType('${a.id}','feedback')">🟢 Feedback</button>
+        </div>
+        <div class="ai-meta">
+          <span>${a.name} · ${a.time}</span>
+          <span class="ai-actions" onclick="event.stopPropagation()">
+            <span class="ai-save" id="as-${a.id}" onclick="annotSave('${a.id}')">保存</span>
+            <span class="ai-edit" onclick="annotEdit('${a.id}')">编辑</span>
+            <span class="ai-del" onclick="annotDel('${a.id}')">删除</span>
+          </span>
+        </div>`;
       list.appendChild(div);
     });
     const badge = document.getElementById('annot-badge');
@@ -1885,6 +1927,36 @@
     const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
     if(mark){ const parent = mark.parentNode; while(mark.firstChild) parent.insertBefore(mark.firstChild, mark); parent.removeChild(mark); }
     renderPanel();
+  };
+
+  // ── 编辑 ──
+  window.annotEdit = function(id){
+    const el = document.getElementById('ac-' + id);
+    const saveBtn = document.getElementById('as-' + id);
+    if(!el) return;
+    el.contentEditable = 'true';
+    el.focus();
+    if(saveBtn) saveBtn.style.display = 'inline';
+  };
+  window.annotSave = function(id){
+    const el = document.getElementById('ac-' + id);
+    const saveBtn = document.getElementById('as-' + id);
+    if(!el) return;
+    el.contentEditable = 'false';
+    if(saveBtn) saveBtn.style.display = 'none';
+    const a = annotations.find(x => x.id === id);
+    if(a) a.comment = el.textContent.trim();
+  };
+
+  // ── 类型切换 ──
+  window.annotSetType = function(id, type){
+    const a = annotations.find(x => x.id === id);
+    if(!a) return;
+    a.type = type;
+    const item = document.getElementById('ai-' + id);
+    if(!item) return;
+    item.querySelectorAll('.ai-type-btn').forEach(btn => btn.classList.remove('active'));
+    item.querySelector('.ai-type-' + type).classList.add('active');
   };
 
   // ── 导出 ──
