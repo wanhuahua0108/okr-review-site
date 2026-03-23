@@ -259,8 +259,9 @@
     /* edit-scope: 编辑时所有 data-key 元素高亮可编辑 */
     .edit-scope.editing [data-key] {
       outline: none; border-radius: 4px; padding: 2px 4px; margin: -2px -4px;
-      cursor: text; display: inline-block;
+      cursor: text;
     }
+    .edit-scope.editing [data-key]:not(li):not(td span) { display: inline-block; }
     .edit-scope.editing [data-key]:hover { background: var(--bg); }
     .edit-scope.editing [data-key]:focus { background: var(--accent-light); box-shadow: 0 0 0 2px var(--accent); }
     .edit-scope.editing .edit-btn { background: var(--accent); color: #fff; border-color: var(--accent); }
@@ -423,7 +424,7 @@
             
             <div style="display:flex;align-items:baseline;gap:6px;">
               <span style="font-weight:700;white-space:nowrap;color:var(--s3);font-size:0.78rem;flex-shrink:0;">Q2 展望</span>
-              <span>新项目将采用AI驱动工作流程，优先从UI规范入手搭建自动化流程，音频配置后续评估整合方案，目标Q2完成整体框架搭建并产出音频引擎性能对比报告。</span>
+              <span>新项目将采用AI驱动工作流程，优先从UI规范入手搭建自动化流程，音频配置后续评估整合方案，目标Q2完成整体框架搭建并产出音频引擎性能对比报告。音频引擎的整体代码Review及架构梳理。</span>
             </div>
             
           
@@ -553,14 +554,20 @@
                data-key="2026Q1_凌云_fh_语音项目推进">英语配音工作流调整，时间紧张风险较大</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_语音项目推进_0">伊瑟OBT 11、12、13三个版本推进</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_语音项目推进_1">伊瑟9月份联动语音使用权沟通中</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_语音项目推进_2">火炬英语配音流程刚走完，改3.23这周配音</li>
+            
             
           </ul>
           
@@ -580,17 +587,25 @@
                data-key="2026Q1_凌云_fh_供应商管理优化">外包拆分优化，提升质量降低成本</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_供应商管理优化_0">铃兰重新拆分外包，短音效当音效发，长音效当视频发</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_供应商管理优化_1">RO2音效供应商报价优化，从300元降至220元</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_供应商管理优化_2">供应商能力标签化管理，挖掘现有供应商潜力</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_供应商管理优化_3">签署供应商形成标准化机制</li>
+            
             
           </ul>
           
@@ -610,20 +625,30 @@
                data-key="2026Q1_凌云_fh_工具自动化">自动化工具提升效率，SRM系统使用率待提升</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_工具自动化_0">海外供应商打印功能实现，工作效率大幅提升</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_工具自动化_1">特定工单提醒工具开发中</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_工具自动化_2">新供应商报告工具用cursor重构</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_工具自动化_3">SRM新建文件夹功能使用率未达100%</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_凌云_fb_工具自动化_4">伊瑟自动化测试脚本已可用</li>
+            
             
           </ul>
           
@@ -919,14 +944,20 @@
                data-key="2026Q1_音频TA_fh_工作空间优化">Q1完成工具源代码重建和虚拟环境重建</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_工作空间优化_0">整合重复镜像文件，集中项目文件路径，工具分布上传至perforce</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_工作空间优化_1">使用Cursor、Claude Code突破AI编码瓶颈，提升开发效率</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_工作空间优化_2">了解GitHub高星开源工具（cli-anything、MCP），为Wwise制定规范流程</li>
+            
             
           </ul>
           
@@ -946,14 +977,20 @@
                data-key="2026Q1_音频TA_fh_Venus项目协作">4月份完成代码模块分区分配多人协作方案</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_Venus项目协作_0">启明代码耦合度高，需先进行代码分区规整</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_Venus项目协作_1">4月与启明密切合作，制定多人协作方案，4月底完成方案雏形</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_Venus项目协作_2">AI agent功能框架建立良好的协议和管理机制</li>
+            
             
           </ul>
           
@@ -973,14 +1010,20 @@
                data-key="2026Q1_音频TA_fh_MCP功能开发">MCP基础功能已实现，可上线测试</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_MCP功能开发_0">目前已有2-3个API可以调用，比维纳斯轻得多</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_MCP功能开发_1">Q2前半月尽早让外采MCP功能上线测试</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频TA_fb_MCP功能开发_2">上线MCP后转型到Wwise的skills方向，跟上市场潮流</li>
+            
             
           </ul>
           
@@ -1248,14 +1291,20 @@
                data-key="2026Q1_音频QA_fh_音频自动化测试工具">已完成自动化脚本开发，支持一键部署和无人托管功能</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_音频自动化测试工具_0">火炬项目完成静态检测功能，跑测项目可正常运行</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_音频自动化测试工具_1">伊瑟项目实现角色自动化跑测，通过接口指令一键测试指定角色</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_音频自动化测试工具_2">小镇开发通用爆音检测工具，支持不同项目自动爆音检测</li>
+            
             
           </ul>
           
@@ -1275,14 +1324,20 @@
                data-key="2026Q1_音频QA_fh_铃兰项目测试">2.6-2.8版本全面测试，覆盖多个角色和功能模块</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_铃兰项目测试_0">2.6-2.7版本：埃拉曼下韩配测试、萨曼莎SP皮肤动画、露西亚现代篇剧情等</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_铃兰项目测试_1">2.8版本：露西亚历史篇测试，覆盖剧情语音音效和活动UI</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_铃兰项目测试_2">伊凡角色技能语音效、皮肤动画、大招音效全面测试</li>
+            
             
           </ul>
           
@@ -1302,14 +1357,20 @@
                data-key="2026Q1_音频QA_fh_麦芬项目测试">按版本周期持续测试，覆盖主线、活动和玩法内容</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_麦芬项目测试_0">1月：姜王谷主线章节音效、春节活动UI音效、年兽大作战BOSS测试</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_麦芬项目测试_1">2月：姜王谷副本BOSS测试，新增活动怪有礼</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_音频QA_fb_麦芬项目测试_2">3月：赛马玩法、全职业12转技能、龙23沧玄蟠天龙测试</li>
+            
             
           </ul>
           
@@ -1513,7 +1574,7 @@
         <div style="display:flex;align-items:baseline;gap:6px;">
           <span style="font-weight:700;white-space:nowrap;color:var(--s3);font-size:0.82rem;">Q2 展望</span>
           <span contenteditable="false"
-                data-key="2026Q1_麦芬_conclusion_q2">新项目将采用AI驱动工作流程，优先从UI规范入手搭建自动化流程，音频配置后续评估整合方案，目标Q2完成整体框架搭建并产出音频引擎性能对比报告。</span>
+                data-key="2026Q1_麦芬_conclusion_q2">新项目将采用AI驱动工作流程，优先从UI规范入手搭建自动化流程，音频配置后续评估整合方案，目标Q2完成整体框架搭建并产出音频引擎性能对比报告。音频引擎的整体代码Review及架构梳理。</span>
         </div>
         
       </div>
@@ -1542,17 +1603,25 @@
                data-key="2026Q1_麦芬_fh_BD12版本开发">职业技能、地图怪物已完成，风雪山庄BOSS下周上线</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_BD12版本开发_0">已完成十二五职业技能开发</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_BD12版本开发_1">三张大地图：黄水瀑布、香王谷、风雪山庄</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_BD12版本开发_2">风雪山庄最后一个BOSS下周完成并上线</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_BD12版本开发_3">春花游系列活动音乐基础已完成</li>
+            
             
           </ul>
           
@@ -1572,20 +1641,25 @@
                data-key="2026Q1_麦芬_fh_音频引擎开发">音频中间件引擎Demo完成，Unity SDK开发中</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_音频引擎开发_0">可完全替代WWISE的音频引擎</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_音频引擎开发_1">Unity Audio SDK正在开发中</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_音频引擎开发_2">下月开始集成到正式Unity工程</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_音频引擎开发_3">Q2将提供性能对比报告</li>
             
-            <li contenteditable="false"
-                data-key="2026Q1_麦芬_fb_音频引擎开发_4">多语言版本仅保留英语</li>
             
           </ul>
           
@@ -1605,20 +1679,30 @@
                data-key="2026Q1_麦芬_fh_AI流程规划">新项目搭建AI全流程，UI优先介入，音频后续整合</div>
           <ul class="feat-bullets">
             
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_AI流程规划_0">基于SDD规范驱动流程开发</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_AI流程规划_1">UI规范易于AI介入，优先实施</li>
             
+            
+            
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_AI流程规划_2">音频配置工作相对滞后，需评估性价比</li>
             
+            
+            
             <li contenteditable="false"
-                data-key="2026Q1_麦芬_fb_AI流程规划_3">老罗团队负责开发工具链，与引擎无关</li>
+                data-key="2026Q1_麦芬_fb_AI流程规划_3">老罗团队负责开发工具链</li>
+            
+            
             
             <li contenteditable="false"
                 data-key="2026Q1_麦芬_fb_AI流程规划_4">Q2完成整体框架搭建</li>
+            
             
           </ul>
           
