@@ -233,6 +233,8 @@
     .feat-card.editing .feat-headline:focus,
     .feat-card.editing .feat-bullets li:focus { background: rgba(255,255,255,0.5); }
     .bullet-del { display:none; cursor:pointer; color:#ef4444; font-weight:700; margin-left:6px; font-size:0.85rem; user-select:none; vertical-align:middle; }
+    .row-del { display:none; cursor:pointer; color:#ef4444; font-weight:700; font-size:0.85rem; user-select:none; }
+    .row-del-cell { display:none; }
     .feat-card.editing .bullet-del,
     .edit-scope.editing .bullet-del { display:inline; }
     .bullet-add { display:none; margin-top:6px; }
@@ -712,7 +714,7 @@
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_1"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#fef3c7;color:#92400e;">存在阻滞</span>
@@ -726,12 +728,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_1">网易这边需要沟通</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_2"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -745,12 +750,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_2">音乐混音外包测试推进中</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_3"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -764,12 +772,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_3">郭磊多给0.5人力，需要提前沟通协调</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_4"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -783,12 +794,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_4">测开预计4月实现录屏工具增加声音的功能，主题歌手联系签约</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_5"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -802,12 +816,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_5">喜羊羊联动正常上线，协调替代方案</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tstat_6"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -820,6 +837,9 @@
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_凌云_tprog_6">Elevenlab参数调整优先实现，歌词润色优先级不高</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
               </td>
             </tr>
             
@@ -1101,7 +1121,7 @@
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tstat_1"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#dbeafe;color:#1e40af;">已完成</span>
@@ -1115,12 +1135,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tprog_1">已完成，工具链更清晰</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tstat_2"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1134,12 +1157,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tprog_2">Demo可用，2-3个API可调用</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tstat_3"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1153,12 +1179,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tprog_3">方案讨论中，4月底完成雏形</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tstat_4"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1172,12 +1201,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tprog_4">服务器小龙虾已搭好，部分业务可接入</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tstat_5"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">计划优化</span>
@@ -1190,6 +1222,9 @@
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频TA_tprog_5">计划中，跟上市场潮流</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
               </td>
             </tr>
             
@@ -1462,7 +1497,7 @@
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频QA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tstat_1"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#fee2e2;color:#991b1b;">存在风险</span>
@@ -1476,12 +1511,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tprog_1">自动化测试未进行，等待设计师提供测试内容</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频QA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tstat_2"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1495,12 +1533,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tprog_2">覆盖三个版本测试，S3.3版本奥萨尔艾罗安角色测试</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频QA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tstat_3"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1514,12 +1555,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tprog_3">完成赛季玩法跑测，还剩4-5个赛季未完成</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="音频QA" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tstat_4"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">计划优化</span>
@@ -1532,6 +1576,9 @@
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_音频QA_tprog_4">常规维护，Q2计划使用工具一键生成测试用例</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
               </td>
             </tr>
             
@@ -1806,7 +1853,7 @@
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="麦芬" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tstat_1"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#fef3c7;color:#92400e;">存在阻滞</span>
@@ -1820,12 +1867,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tprog_1">仅完成春节宠物，新坐骑需求未完整，可能延至Q2</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="麦芬" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tstat_2"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1839,12 +1889,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tprog_2">春花游系列音乐基础完成，UI音效本周完成</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="麦芬" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tstat_3"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -1858,12 +1911,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tprog_3">电影部简化制作，音频沟通完成</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="麦芬" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tstat_4"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">计划优化</span>
@@ -1876,6 +1932,9 @@
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_麦芬_tprog_4">飞书文档陆续进行中，有基础进展</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
               </td>
             </tr>
             
@@ -2231,7 +2290,7 @@
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="铃兰" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tstat_1"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#dbeafe;color:#1e40af;">已完成</span>
@@ -2245,12 +2304,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tprog_1">现代篇+历史篇共50段演出全部完成</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="铃兰" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tstat_2"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -2264,12 +2326,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tprog_2">已上线，发包效率显著提升</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="铃兰" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tstat_3"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
@@ -2283,12 +2348,15 @@
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tprog_3">完成露西亚现代篇+历史篇全部配置</span>
               </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
             </tr>
             
             
               
             
-            <tr class="tbl-row">
+            <tr class="tbl-row" data-person="铃兰" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tstat_4"
                       style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">计划优化</span>
@@ -2297,10 +2365,13 @@
                 <span contenteditable="false" data-key="2026Q1_铃兰_tname_4">自动录屏</span>
               </td>
               <td class="tbl-td">
-                <span contenteditable="false" data-key="2026Q1_铃兰_tcont_4">Q2解决自动录屏和自动命名问题</span>
+                <span contenteditable="false" data-key="2026Q1_铃兰_tcont_4">解决自动录屏和演出脚步声的问题</span>
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_铃兰_tprog_4">参考RO2方案，规划中</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
               </td>
             </tr>
             
