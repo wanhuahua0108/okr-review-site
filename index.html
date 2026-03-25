@@ -3310,10 +3310,9 @@
           <span class="ai-actions" onclick="event.stopPropagation()">
             ${canDelete(a.issueNum) ? `
             ${isAdmin() && !a.fixed && a.type==='bug' ? `<span class="ai-edit" style="color:#4f46e5" onclick="annotFix('${a.id}')">一键修复</span>` : ''}
-            ${a.fixed ? `<span class="ai-del" onclick="annotDel('${a.id}')">清除</span>` : `
             <span class="ai-save" id="as-${a.id}" onclick="annotSave('${a.id}')">保存</span>
             <span class="ai-edit" onclick="annotEdit('${a.id}')">编辑</span>
-            <span class="ai-del" onclick="annotDel('${a.id}')">删除</span>`}` : ''}
+            <span class="ai-del" onclick="annotDel('${a.id}')">${a.fixed ? '清除' : '删除'}</span>` : ''}
           </span>
         </div>`;
       list.appendChild(div);
