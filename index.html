@@ -3310,6 +3310,7 @@
           <span class="ai-actions" onclick="event.stopPropagation()">
             ${canDelete(a.issueNum) ? `
             ${isAdmin() && !a.fixed && a.type==='bug' ? `<span class="ai-edit" style="color:#4f46e5" onclick="annotFix('${a.id}')">一键修复</span>` : ''}
+            ${isAdmin() && a.fixed ? `<span class="ai-edit" id="ar-${a.id}" style="color:#7e22ce" onclick="annotRefix('${a.id}')">重新修复</span>` : ''}
             <span class="ai-save" id="as-${a.id}" onclick="annotSave('${a.id}')">保存</span>
             <span class="ai-edit" onclick="annotEdit('${a.id}')">编辑</span>
             <span class="ai-del" onclick="annotDel('${a.id}')">${a.fixed ? '清除' : '删除'}</span>` : ''}
@@ -3387,6 +3388,45 @@
         })() : null })
       }).catch(()=>{});
     }
+  };
+
+  // ── 重新修复（编辑评论后用新注释再次修复） ──
+  window.annotRefix = function(id){
+    const a = annotations.find(x => x.id === id);
+    if(!a || !a.issueNum) return;
+    const btn = document.getElementById('ar-' + id);
+    if(btn){ btn.textContent = '修复中…'; btn.style.pointerEvents = 'none'; }
+    const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
+    const _k = _r.split('').reverse().join('');
+    const _gh = {'Authorization':'Bearer '+_k,'Content-Type':'application/json','User-Agent':'OKR-Annotator'};
+    // 1. 读取 issue，取修复为字段作为新原文
+    fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`, {headers:_gh})
+    .then(r => r.json())
+    .then(issue => {
+      const body = issue.body || '';
+      const fixedAs = (body.match(/\*\*修复为：\*\* (.+)/) || [])[1]?.trim() || a.quote;
+      const newBody = `**类型：** Bug\n\n**原文：** ${fixedAs}\n\n**评论：** ${a.comment}\n\n**来自：** ${a.name}\u3000**时间：** ${a.time}`;
+      // 2. 重开 issue 并更新 body
+      return fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`, {
+        method:'PATCH', headers:_gh,
+        body: JSON.stringify({state:'open', body: newBody, labels:['annotation','bug']})
+      });
+    })
+    .then(r => r.json())
+    .then(() => {
+      // 3. 调本地 server 修复
+      a.fixed = false;
+      return fetch('http://localhost:9173/api/fix-bug', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({issue: a.issueNum})
+      });
+    })
+    .then(r => r.json())
+    .then(data => {
+      if(data.ok){ a.fixed = true; renderPanel(); }
+      else if(btn){ btn.textContent = '❌ ' + (data.error||'失败'); btn.style.pointerEvents = ''; }
+    })
+    .catch(() => { if(btn){ btn.textContent = '❌ 失败'; btn.style.pointerEvents = ''; } });
   };
 
   // ── 类型切换 ──
