@@ -2951,7 +2951,7 @@
     const VERSION = "2026-03-25 18:00";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
-        if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
+        if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode' && !k.startsWith('annot')) {
           localStorage.removeItem(k);
         }
       });
