@@ -332,6 +332,8 @@
   
   <button class="tab-btn" onclick="switchTab('person-7', this)">伊瑟</button>
   
+  <button class="tab-btn" onclick="switchTab('person-8', this)">其他</button>
+  
 </div>
 
 <!-- ═══════════════ 汇总 Tab ═══════════════ -->
@@ -509,6 +511,20 @@
         <!-- 角色列 -->
         <div style="min-width:80px;flex-shrink:0;padding-top:2px;">
           <div style="font-weight:700;font-size:0.9rem;">伊瑟</div>
+        </div>
+        <!-- 总结内容列 -->
+        <div style="flex:1;font-size:0.88rem;line-height:1.7;">
+          
+            <span style="color:var(--subtext);font-style:italic;font-size:0.85rem;">暂无 OKR Review 数据</span>
+          
+        </div>
+      </div>
+      
+      
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <!-- 角色列 -->
+        <div style="min-width:80px;flex-shrink:0;padding-top:2px;">
+          <div style="font-weight:700;font-size:0.9rem;">其他</div>
         </div>
         <!-- 总结内容列 -->
         <div style="flex:1;font-size:0.88rem;line-height:1.7;">
@@ -2464,7 +2480,7 @@
                   data-key="2026Q1_小镇_q2_品质提升_1">视觉+音频整体品质提升方案（结合3D TA/动画特效），评估后确定行动项<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
               
               <li contenteditable="false"
-                  data-key="2026Q1_小镇_q2_品质提升_2">海洋季音乐设计；3月31日白模搭建完成后后沟通海底场景音乐需求<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+                  data-key="2026Q1_小镇_q2_品质提升_2">海洋季音乐设计；3月31日白模搭建完成后沟通海底场景音乐需求<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
               
               <li contenteditable="false"
                   data-key="2026Q1_小镇_q2_品质提升_3">超越专辑曲目整理（约30首），周年庆前推进<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
@@ -2895,6 +2911,34 @@
   </div>
 </div>
 
+<div id="tab-person-8" class="tab-panel">
+  <div class="main-wide">
+
+    
+
+    <!-- 会议标题 -->
+    <div class="edit-scope" style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <div style="flex:1;">
+        <h2 style="font-size:1.3rem;font-weight:800;color:var(--text);margin:0 0 4px 0;"
+            contenteditable="false"
+            data-key="2026Q1_其他_title">其他 2026Q1 OKR Review</h2>
+        
+      </div>
+      
+    </div>
+
+    
+    <!-- 暂无数据占位 -->
+    <div style="text-align:center;padding:80px 24px;color:var(--subtext);">
+      <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+      <div style="font-size:1rem;font-weight:600;margin-bottom:6px;">其他 暂无 OKR Review 数据</div>
+      <div style="font-size:0.85rem;">会议结束后运行 process.py 生成本季度内容</div>
+    </div>
+    
+
+  </div>
+</div>
+
 
 <footer class="footer">
   音频团队 2026Q1 OKR Review · 生成于 2026-03-25 18:05
@@ -3063,9 +3107,10 @@
   <input id="af-name" placeholder="你的名字（可选）" />
   <textarea id="af-text" placeholder="写下你的评论…"></textarea>
   <div style="display:flex;gap:8px;margin-top:10px;" onclick="event.stopPropagation()">
-    <button id="af-type-bug" class="ai-type-btn ai-type-bug active" style="opacity:1" onclick="afSetType('bug')">🔴 Bug</button>
+    <button id="af-type-bug" class="ai-type-btn ai-type-bug active" style="opacity:1" onclick="afSetType('bug')">🔴 错误修改</button>
     <button id="af-type-feedback" class="ai-type-btn ai-type-feedback" onclick="afSetType('feedback')">🟢 Feedback</button><span style="font-size:0.74rem;color:#94a3b8;margin-left:4px;align-self:center;">（二选一）</span>
   </div>
+  <div style="font-size:0.74rem;color:#94a3b8;margin-top:6px;line-height:1.5;">需要修改的内容请前后加上双引号，如需删除则打两个双引号 <b>""</b></div>
   <div class="af-actions">
     <button class="af-btn af-cancel" onclick="annotCancel()">取消</button>
     <button class="af-btn af-submit" onclick="annotSubmit()">确认</button>
