@@ -2283,7 +2283,7 @@
                 <span contenteditable="false" data-key="2026Q1_小镇_tname_1">常规版本内容制作</span>
               </td>
               <td class="tbl-td">
-                <span contenteditable="false" data-key="2026Q1_小镇_tcont_1">冰雪季/庆典梦光影/联动/节假日，拼合街市0416版本的拼合街市仍在制作</span>
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_1">冰雪季/庆典梦光影/联动/节假日，0416版本（拼合街市）仍在制作</span>
               </td>
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_小镇_tprog_1">自评0.6，宣发和开发效率提升</span>
@@ -3543,14 +3543,16 @@
         // 只显示 bug 类型的已修复（feedback 不需要显示已修复状态）
         if(!labels.includes('bug')) return;
         const body = issue.body || '';
-        const quote   = (body.match(/\*\*原文：\*\* (.+)/) || [])[1] || '';
-        const comment = (body.match(/\*\*评论：\*\* (.+)/) || [])[1] || '';
-        const name    = (body.match(/\*\*来自：\*\* ([^\u3000]+)/) || [])[1]?.trim() || '匿名';
-        const time    = (body.match(/\*\*时间：\*\* (.+)/) || [])[1]?.trim() || '';
+        const quote      = (body.match(/\*\*原文：\*\* (.+)/) || [])[1] || '';
+        const fixedAs    = (body.match(/\*\*修复为：\*\* (.+)/) || [])[1] || '';
+        const comment    = (body.match(/\*\*评论：\*\* (.+)/) || [])[1] || '';
+        const name       = (body.match(/\*\*来自：\*\* ([^\u3000]+)/) || [])[1]?.trim() || '匿名';
+        const time       = (body.match(/\*\*时间：\*\* (.+)/) || [])[1]?.trim() || '';
         if(!quote || !comment) return;
         const id = 'gh-' + issue.number;
         if(annotations.find(a => a.id === id)) return;
-        const marked = highlightQuote(quote, id, 'annot-mark fixed');
+        const highlightText = fixedAs || quote;
+        const marked = highlightQuote(highlightText, id, 'annot-mark fixed');
         annotations.push({ id, quote, comment, name, time, type: 'bug', fixed: true, marked, issueNum: issue.number });
       });
       renderPanel();
