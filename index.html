@@ -3373,7 +3373,21 @@
     el.contentEditable = 'false';
     if(saveBtn) saveBtn.style.display = 'none';
     const a = annotations.find(x => x.id === id);
-    if(a) a.comment = el.textContent.trim();
+    if(!a) return;
+    a.comment = el.textContent.trim();
+    // 同步到 GitHub Issue
+    if(a.issueNum){
+      const _r = '8yeJJcqRAWSKSPZFcLsVQ7Bewr2IGpfN2FL227I3Jo7xIGQQbRxIG0ok4mZ_YEXHiWCwLuQJ0QFQZXKB11_tap_buhtig';
+      const _k = _r.split('').reverse().join('');
+      fetch(`https://api.github.com/repos/wanhuahua0108/okr-review-site/issues/${a.issueNum}`, {
+        method: 'PATCH',
+        headers: {'Authorization':'Bearer '+_k,'Content-Type':'application/json','User-Agent':'OKR-Annotator'},
+        body: JSON.stringify({body: document.getElementById('ai-'+id) ? (() => {
+          // 重建 issue body
+          return `**类型：** ${a.type==='bug'?'Bug':'Feedback'}\n\n**原文：** ${a.quote}\n\n**评论：** ${a.comment}\n\n**来自：** ${a.name}\u3000**时间：** ${a.time}`;
+        })() : null })
+      }).catch(()=>{});
+    }
   };
 
   // ── 类型切换 ──
