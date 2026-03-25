@@ -307,7 +307,7 @@
     <p>会议日期：2026-03</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-24 16:39</span>
+    <span>生成于 2026-03-25 14:49</span>
     
   </div>
 </header>
@@ -331,6 +331,8 @@
   <button class="tab-btn" onclick="switchTab('person-6', this)">铃兰</button>
   
   <button class="tab-btn" onclick="switchTab('person-7', this)">伊瑟</button>
+  
+  <button class="tab-btn" onclick="switchTab('person-8', this)">其他</button>
   
 </div>
 
@@ -463,7 +465,18 @@
         <!-- 总结内容列 -->
         <div style="flex:1;font-size:0.88rem;line-height:1.7;">
           
-            <span style="color:var(--subtext);font-style:italic;font-size:0.85rem;">暂无 OKR Review 数据</span>
+            
+            <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:5px;">
+              <span style="font-weight:700;white-space:nowrap;color:var(--s1);font-size:0.78rem;flex-shrink:0;">Q1 总结</span>
+              <span>常规版本内容按期交付（0.6），工具开发效率显著提升（0.8），声音玩法因家具/场景条件受阻（0.2）；乐器采样新方案落地，音乐制作稳步推进。</span>
+            </div>
+            
+            
+            <div style="display:flex;align-items:baseline;gap:6px;">
+              <span style="font-weight:700;white-space:nowrap;color:var(--s3);font-size:0.78rem;flex-shrink:0;">Q2 展望</span>
+              <span>Q2排期密集（海深海季/拼合街市/四个联动）；视觉音频品质整体提升为项目组重点方向；音乐会与音游玩法结合、乐器键位优化待推进。</span>
+            </div>
+            
           
         </div>
       </div>
@@ -498,6 +511,20 @@
         <!-- 角色列 -->
         <div style="min-width:80px;flex-shrink:0;padding-top:2px;">
           <div style="font-weight:700;font-size:0.9rem;">伊瑟</div>
+        </div>
+        <!-- 总结内容列 -->
+        <div style="flex:1;font-size:0.88rem;line-height:1.7;">
+          
+            <span style="color:var(--subtext);font-style:italic;font-size:0.85rem;">暂无 OKR Review 数据</span>
+          
+        </div>
+      </div>
+      
+      
+      <div style="display:flex;align-items:flex-start;gap:20px;padding:16px 20px;border-bottom:1px solid var(--border);">
+        <!-- 角色列 -->
+        <div style="min-width:80px;flex-shrink:0;padding-top:2px;">
+          <div style="font-weight:700;font-size:0.9rem;">其他</div>
         </div>
         <!-- 总结内容列 -->
         <div style="flex:1;font-size:0.88rem;line-height:1.7;">
@@ -2059,17 +2086,414 @@
             contenteditable="false"
             data-key="2026Q1_小镇_title">小镇 2026Q1 OKR Review</h2>
         
+        <div style="font-size:0.8rem;color:var(--subtext);">会议日期：2026-03-25</div>
+        
       </div>
       
     </div>
 
     
-    <!-- 暂无数据占位 -->
-    <div style="text-align:center;padding:80px 24px;color:var(--subtext);">
-      <div style="font-size:2rem;margin-bottom:12px;">📋</div>
-      <div style="font-size:1rem;font-weight:600;margin-bottom:6px;">小镇 暂无 OKR Review 数据</div>
-      <div style="font-size:0.85rem;">会议结束后运行 process.py 生成本季度内容</div>
+
+    <!-- ③ 核心结论（顶部，Q1总结 + Q2展望两行） -->
+    
+    <div class="conclusion-box edit-scope" style="margin-bottom:24px;align-items:flex-start;">
+      <span class="conclusion-icon" style="margin-top:3px;">💡</span>
+      <div style="flex:1;">
+        
+        <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
+          <span style="font-weight:700;white-space:nowrap;color:var(--s1);font-size:0.82rem;">Q1 总结</span>
+          <span contenteditable="false"
+                data-key="2026Q1_小镇_conclusion_q1">常规版本内容按期交付（0.6），工具开发效率显著提升（0.8），声音玩法因家具/场景条件受阻（0.2）；乐器采样新方案落地，音乐制作稳步推进。</span>
+        </div>
+        
+        
+        <div style="display:flex;align-items:baseline;gap:6px;">
+          <span style="font-weight:700;white-space:nowrap;color:var(--s3);font-size:0.82rem;">Q2 展望</span>
+          <span contenteditable="false"
+                data-key="2026Q1_小镇_conclusion_q2">Q2排期密集（海深海季/拼合街市/四个联动）；视觉音频品质整体提升为项目组重点方向；音乐会与音游玩法结合、乐器键位优化待推进。</span>
+        </div>
+        
+      </div>
+      
+
     </div>
+    
+
+    <!-- ① 重点项目 -->
+    
+    <div style="margin-bottom:32px;">
+      <div style="font-size:0.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--subtext);margin-bottom:14px;">重点事项</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        
+        
+        <div class="feat-card feat-good edit-scope">
+          <div class="feat-header">
+            <span style="font-size:1rem;" contenteditable="false"
+                  data-key="2026Q1_小镇_ficon_1">🎵</span>
+            <span class="feat-name" contenteditable="false"
+                  data-key="2026Q1_小镇_fname_1">常规版本内容制作</span>
+            <span class="feat-badge" contenteditable="false"
+                  data-key="2026Q1_小镇_fbadge_1">完成 0.6</span>
+          </div>
+          <div class="feat-headline" contenteditable="false"
+               data-key="2026Q1_小镇_fh_常规版本内容制作">冰雪季/庆典/联动内容按期交付，AI提效明显</div>
+          <ul class="feat-bullets" data-person="小镇" data-fname="常规版本内容制作" data-quarter="2026Q1">
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_常规版本内容制作_0">1~3月潮流季、庆典木光影、平和街市（0416在制）<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_常规版本内容制作_1">新增滑冰/烟花优化、空灵鼓/萨克斯乐器<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_常规版本内容制作_2">喜羊联动、春节泼水节等节假日内容<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_常规版本内容制作_3">借助AI加持，宣发和开发效率大幅提升<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+          </ul>
+          <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          
+        </div>
+        
+        
+        <div class="feat-card feat-good edit-scope">
+          <div class="feat-header">
+            <span style="font-size:1rem;" contenteditable="false"
+                  data-key="2026Q1_小镇_ficon_2">🔧</span>
+            <span class="feat-name" contenteditable="false"
+                  data-key="2026Q1_小镇_fname_2">工具与效率优化</span>
+            <span class="feat-badge" contenteditable="false"
+                  data-key="2026Q1_小镇_fbadge_2">完成 0.8</span>
+          </div>
+          <div class="feat-headline" contenteditable="false"
+               data-key="2026Q1_小镇_fh_工具与效率优化">导入工具上线，流程提效，QA自动化测试落地</div>
+          <ul class="feat-bullets" data-person="小镇" data-fname="工具与效率优化" data-quarter="2026Q1">
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_工具与效率优化_0">完成导入工具开发，消除手动导入流程<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_工具与效率优化_1">状态机导表工具二期开发（技术支撑协助）<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_工具与效率优化_2">AI语音调研：效果不佳，AI感明显，暂不采用<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_工具与效率优化_3">音频自动化静态测试：检测外小镇配置丢失/错误<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+          </ul>
+          <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          
+        </div>
+        
+        
+        <div class="feat-card feat-good edit-scope">
+          <div class="feat-header">
+            <span style="font-size:1rem;" contenteditable="false"
+                  data-key="2026Q1_小镇_ficon_3">🎮</span>
+            <span class="feat-name" contenteditable="false"
+                  data-key="2026Q1_小镇_fname_3">声音玩法拓展</span>
+            <span class="feat-badge" contenteditable="false"
+                  data-key="2026Q1_小镇_fbadge_3">受阻 0.2</span>
+          </div>
+          <div class="feat-headline" contenteditable="false"
+               data-key="2026Q1_小镇_fh_声音玩法拓展">混响/音游/音乐会拓展均遇阻，Q2方向已明确</div>
+          <ul class="feat-bullets" data-person="小镇" data-fname="声音玩法拓展" data-quarter="2026Q1">
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_声音玩法拓展_0">混响×家具结合：无合适家具，无法落地<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_声音玩法拓展_1">音游参考莉莉小人国，适合小镇但评分偏低<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_声音玩法拓展_2">音乐会拓展：逻辑与光遇不同，仍在探讨<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+            
+            <li contenteditable="false"
+                data-key="2026Q1_小镇_fb_声音玩法拓展_3">Q2方向：音乐会+音游事件结合，降低开发成本<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+            
+            
+          </ul>
+          <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          
+        </div>
+        
+      </div>
+    </div>
+    
+
+    <!-- ② 项目跟进表 -->
+    
+    <div class="edit-scope" style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="font-size:0.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--subtext);">事务跟进表</div>
+        
+      </div>
+      <div class="module-card" style="margin-bottom:0;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr style="background:var(--bg);">
+              <th class="tbl-th" style="width:90px;">状态</th>
+              <th class="tbl-th">项目名称</th>
+              <th class="tbl-th">主要内容</th>
+              <th class="tbl-th">进展情况</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            
+            
+            
+            
+            
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_1"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#dbeafe;color:#1e40af;">已完成</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_1">常规版本内容制作</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_1">冰雪季/庆典木光影/联动/节假日，平和街市0416仍在制</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_1">自评0.6，AI加持后宣发和开发效率提升</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_2"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#dbeafe;color:#1e40af;">已完成</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_2">工具开发与效率优化</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_2">导入工具/状态机导表工具二期/QA音频自动化测试</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_2">自评0.8，流程提效显著，手动导入基本消除</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_3"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">受阻</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_3">声音玩法拓展</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_3">混响×家具结合/音游/音乐会拓展</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_3">自评0.2，混响因无合适家具卡住，音游/音乐会方向待确定</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_4"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_4">乐器采样与键位优化</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_4">新采样方案（音头+body+音尾），萨克斯/空灵鼓制作，补齐YS架构UI</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_4">新模式已落地，下版本继续优化</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_5"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">正常推进</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_5">音乐设计与制作</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_5">冰雪季六首/喜羊羊/梦光影登录音乐；线上活动音乐迭代</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_5">线上活动因资源迭代进展较慢，约完成一半</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+            
+              
+            
+            <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tstat_6"
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#d1fae5;color:#065f46;">规划中</span>
+              </td>
+              <td class="tbl-td" style="font-weight:600;">
+                <span contenteditable="false" data-key="2026Q1_小镇_tname_6">视觉与音频品质整体提升</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tcont_6">应对竞品，结合3D TA/动画特效的综合品质提升</span>
+              </td>
+              <td class="tbl-td">
+                <span contenteditable="false" data-key="2026Q1_小镇_tprog_6">Q2新方向，约一个月内出行动项</span>
+              </td>
+              <td class="tbl-td row-del-cell" style="width:24px;padding:4px;">
+                <span class="row-del" onclick="deleteTableRow(this)" contenteditable="false" title="删除此行">✕</span>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+
+    <!-- ④ Q2 计划（三列：项目 / 外包 / 商务） -->
+    
+    <div style="margin-bottom:32px;">
+      <div style="font-size:0.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--s3);margin-bottom:14px;">Q2 计划</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start;">
+        
+        <div class="module-card m3 edit-scope" style="margin-bottom:0;">
+          <div class="module-card-header">
+            <div class="module-dot"></div>
+            <div class="module-title">内容</div>
+            
+            </div>
+          <div class="module-card-body">
+            <ul style="padding-left:20px;margin:0;font-size:0.875rem;line-height:1.9;color:var(--text);"
+                data-person="小镇" data-cat="内容" data-quarter="2026Q1" data-type="q2">
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_内容_1">海深海季（全新地图）+ 大型潮流季 + 四个联动，0528进版，0704开始<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_内容_2">拼合街市内容制作<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_内容_3">躲猫猫音乐、各版本卡池皮肤短音乐、Ingame资源<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_内容_4">PV制作与宣发相关工作<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+            </ul>
+            <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          </div>
+        </div>
+        
+        <div class="module-card m3 edit-scope" style="margin-bottom:0;">
+          <div class="module-card-header">
+            <div class="module-dot"></div>
+            <div class="module-title">工具与技术</div>
+            
+            </div>
+          <div class="module-card-body">
+            <ul style="padding-left:20px;margin:0;font-size:0.875rem;line-height:1.9;color:var(--text);"
+                data-person="小镇" data-cat="工具与技术" data-quarter="2026Q1" data-type="q2">
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_工具与技术_1">脚本工具优化<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_工具与技术_2">探索游戏内机器人自动化测试（动物玩法/多人玩法）<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_工具与技术_3">推进采样音乐玩法方案优化，谨慎讨论乐器增加黑键<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+            </ul>
+            <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          </div>
+        </div>
+        
+        <div class="module-card m3 edit-scope" style="margin-bottom:0;">
+          <div class="module-card-header">
+            <div class="module-dot"></div>
+            <div class="module-title">品质提升</div>
+            
+            </div>
+          <div class="module-card-body">
+            <ul style="padding-left:20px;margin:0;font-size:0.875rem;line-height:1.9;color:var(--text);"
+                data-person="小镇" data-cat="品质提升" data-quarter="2026Q1" data-type="q2">
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_品质提升_1">视觉+音频整体品质提升方案（结合3D TA/动画特效），评估后确定行动项<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_品质提升_2">海洋季音乐设计；3月31日白膜后沟通海底场景音乐需求<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+              <li contenteditable="false"
+                  data-key="2026Q1_小镇_q2_品质提升_3">超越专辑曲目整理（约30首），周年庆前推进<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+              
+            </ul>
+            <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+
     
 
   </div>
@@ -2487,16 +2911,44 @@
   </div>
 </div>
 
+<div id="tab-person-8" class="tab-panel">
+  <div class="main-wide">
+
+    
+
+    <!-- 会议标题 -->
+    <div class="edit-scope" style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <div style="flex:1;">
+        <h2 style="font-size:1.3rem;font-weight:800;color:var(--text);margin:0 0 4px 0;"
+            contenteditable="false"
+            data-key="2026Q1_其他_title">其他 2026Q1 OKR Review</h2>
+        
+      </div>
+      
+    </div>
+
+    
+    <!-- 暂无数据占位 -->
+    <div style="text-align:center;padding:80px 24px;color:var(--subtext);">
+      <div style="font-size:2rem;margin-bottom:12px;">📋</div>
+      <div style="font-size:1rem;font-weight:600;margin-bottom:6px;">其他 暂无 OKR Review 数据</div>
+      <div style="font-size:0.85rem;">会议结束后运行 process.py 生成本季度内容</div>
+    </div>
+    
+
+  </div>
+</div>
+
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-24 16:39
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-25 14:49
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-24 16:39";
+    const VERSION = "2026-03-25 14:49";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode') {
