@@ -307,7 +307,7 @@
     <p>会议日期：2026-03</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-26 17:56</span>
+    <span>生成于 2026-03-26 18:38</span>
     
   </div>
 </header>
@@ -4321,14 +4321,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-26 17:56
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-26 18:38
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-26 17:56";
+    const VERSION = "2026-03-26 18:38";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode' && !k.startsWith('annot')) {
@@ -4350,6 +4350,10 @@
     btn.classList.add('active');
     localStorage.setItem('activeTab', id);
     history.replaceState(null, '', '#' + id);
+    renderPanel();
+  }
+  function activeTabId(){
+    return document.querySelector('.tab-panel.active')?.id?.replace('tab-','') || 'summary';
   }
 
   // 恢复 Tab：优先 URL hash，其次 localStorage
@@ -4614,7 +4618,7 @@
       pendingSel.range.surroundContents(span);
       marked = true;
     } catch(e){ /* 跨元素选区，跳过高亮 */ }
-    const annotData = { id, quote, comment, name, time: new Date().toLocaleString('zh-CN'), marked };
+    const annotData = { id, quote, comment, name, time: new Date().toLocaleString('zh-CN'), marked, tabId: activeTabId() };
     annotData.type = type;
     annotations.push(annotData);
     // 保存到本地 server.py（本地运行时）
@@ -4671,8 +4675,17 @@
   // ── 渲染面板 ──
   function renderPanel(){
     const list = document.getElementById('annot-list');
-    list.innerHTML = annotations.length ? '' : '<div style="padding:24px 16px;text-align:center;color:#94a3b8;font-size:0.85rem;">暂无评论</div>';
-    annotations.forEach((a) => {
+    const curTab = activeTabId();
+    const visible = annotations.filter(a => {
+      if(a.tabId) return a.tabId === curTab;
+      // 旧 annotation 无 tabId，按 mark 元素所在 tab 判断
+      const mark = document.querySelector(`.annot-mark[data-annot-id="${a.id}"]`);
+      if(!mark) return false;
+      const panel = mark.closest('.tab-panel');
+      return !panel || panel.id === 'tab-' + curTab;
+    });
+    list.innerHTML = visible.length ? '' : '<div style="padding:24px 16px;text-align:center;color:#94a3b8;font-size:0.85rem;">当前页面暂无评论</div>';
+    visible.forEach((a) => {
       const div = document.createElement('div');
       div.className = 'annot-item';
       div.id = 'ai-' + a.id;
@@ -4705,12 +4718,12 @@
       list.appendChild(div);
     });
     const badge = document.getElementById('annot-badge');
-    badge.style.display = annotations.length ? 'inline' : 'none';
-    badge.textContent = annotations.length;
+    badge.style.display = visible.length ? 'inline' : 'none';
+    badge.textContent = visible.length;
     const adminBadge = document.getElementById('annot-admin-badge');
     if(adminBadge) adminBadge.style.display = isAdmin() ? 'inline' : 'none';
-    const hasFixed = annotations.some(a => a.fixed);
-    const hasOpenBug = annotations.some(a => !a.fixed && a.type === 'bug');
+    const hasFixed = visible.some(a => a.fixed);
+    const hasOpenBug = visible.some(a => !a.fixed && a.type === 'bug');
     const clearBtn = document.getElementById('annot-clear-fixed');
     if(clearBtn) clearBtn.style.display = (isAdmin() && hasFixed) ? 'inline-block' : 'none';
     const fixAllBtn = document.getElementById('annot-fix-all');
