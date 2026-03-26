@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>音乐流媒体上架及巡回 · 2026Q1 OKR Review</title>
+  <title>RO2 配音/语音流程优化 · 2026Q1 OKR Review</title>
   <style>
     :root {
       --bg: #f5f6fa;
@@ -194,15 +194,15 @@
 <header class="header">
   <a class="back-link" href="index.html">← 返回总览</a>
   <span class="header-divider">/</span>
-  <span class="header-crumb">2026Q1 · 音乐流媒体上架及巡回</span>
+  <span class="header-crumb">2026Q1 · RO2 配音/语音流程优化</span>
 </header>
 
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-title">音乐流媒体上架及巡回</div>
+      <div class="hero-title">RO2 配音/语音流程优化</div>
       <div class="hero-meta">
-        <span>👤 凌云</span>
+        <span>👤 RO2音频主设</span>
         <span>📅 2026-03</span>
         <span>🗂 2026Q1</span>
       </div>
@@ -224,7 +224,8 @@
       <div class="section-dot"></div>
       <div class="section-title">本季度 OKR 完成情况</div>
     </div>
-    <div class="section-body"></div>
+    <div class="section-body">部分配音已录完，但赶不上私内版本测试
+配音数据库优化、任务显示ID优化未完成</div>
   </div>
 
   <!-- 遇到的问题 -->
@@ -233,7 +234,14 @@
       <div class="section-dot"></div>
       <div class="section-title">遇到的问题</div>
     </div>
-    <div class="section-body"></div>
+    <div class="section-body">语音整体流程会卡在前期（不一定卡在音频这块）
+策划在Unity改好后文案又在表格上改，数据互相冲突
+唯一ID问题：策划改台词/配错讲话人后ID实时变化，导致配音播不出来
+人工一遍一遍反复订正，耗费人力
+每个任务里都可能有一两条语音播不出来
+新手引导也有漏配（昨天刚补了双胞胎兄弟）
+程序端李翔的代码有风险点（AI分析出来的）
+目前配音测试全靠人工跑</div>
   </div>
 
   <!-- 下季度计划 -->
@@ -242,7 +250,12 @@
       <div class="section-dot"></div>
       <div class="section-title">下季度计划</div>
     </div>
-    <div class="section-body"></div>
+    <div class="section-body">Q2把配音流程全部理顺
+5月份跟刘TA一起整理流程，在下一个配音需求来之前完成
+推进配音自动化测试（不要人测，用机器测）
+跟刘鑫商量流程优化，再跟肖飞对齐
+利用AI识别配置提高效率
+探索自动化跑任务+AI检测语音是否播放正确</div>
   </div>
 
   <!-- 管理者反馈 -->
@@ -251,7 +264,17 @@
       <div class="section-dot"></div>
       <div class="section-title">管理者反馈</div>
     </div>
-    <div class="section-body"></div>
+    <div class="section-body">HH：Q2一定要解决配音自动化测试，写进OKR
+HH：ID不能变，变了就很麻烦，应该锁死
+HH：让TA用AI看程序代码风险点，告诉程序哪里有问题
+HH：语音流程要理顺，让策划和文案改工作流，确保流程顺畅
+HH：不要人测，要机器测，Q2确保机器测试
+HH：可以让董志浩参与自动化测试方案，他很快
+RO2制作人：百分百是流程没想清楚，我今天把ID这事理清楚
+RO2制作人：先想好测试方法，工具都好做
+RO2制作人：先别被阻碍卡住，自己先跑着，等程序修好再接
+RO2导演：可以提给QA/白盒测试，配音需要知道配错和没声音两个诉求
+RO2导演：跟林先提自动化录屏+语音检测</div>
   </div>
 
 </main>
