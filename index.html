@@ -311,7 +311,7 @@
     <p>会议日期：2026-03</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-27 16:04</span>
+    <span>生成于 2026-03-27 16:07</span>
     <button onclick="annotSidebarOpen();renderPanel();" id="annot-open-btn" style="font-size:0.75rem;padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card-bg);cursor:pointer;color:var(--accent);">💬 评论</button>
     
   </div>
@@ -4297,14 +4297,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 16:04
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 16:07
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-27 16:04";
+    const VERSION = "2026-03-27 16:07";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode' && !k.startsWith('annot')) {
@@ -4434,8 +4434,7 @@
 #admin-modal-pw:focus{border-color:#4f46e5;}
 #admin-modal-actions{display:flex;gap:8px;margin-top:12px;justify-content:flex-end;}
 /* 打开面板按钮 */
-#annot-toggle{position:fixed;right:0;bottom:80px;background:#4f46e5;color:#fff;border:none;border-radius:8px 0 0 8px;padding:10px 8px;cursor:pointer;z-index:199;display:none;writing-mode:vertical-rl;font-size:0.78rem;letter-spacing:0.05em;}
-#annot-toggle:hover{background:#4338ca;}
+#annot-toggle{display:none!important;}
 </style>
 
 <!-- 右侧面板 -->
