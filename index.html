@@ -311,7 +311,7 @@
     <p>会议日期：2026-03</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-27 15:09</span>
+    <span>生成于 2026-03-27 15:13</span>
     
   </div>
 </header>
@@ -2503,7 +2503,7 @@
                   data-key="2026Q1_火炬_q2_内容制作_1">按美术优化进度安排英雄技能音频优化，Boss混音优化提前并行推进<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
               
               <li contenteditable="false"
-                  data-key="2026Q1_火炬_q2_内容制作_2">SS5赛季内容制作<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
+                  data-key="2026Q1_火炬_q2_内容制作_2">S15赛季内容制作<span class="bullet-del" contenteditable="false" onclick="deleteBullet(this)">✕</span></li>
               
             </ul>
             <div class="bullet-add"><button onclick="addBullet(this)">＋ 添加条目</button></div>
@@ -4296,14 +4296,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 15:09
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 15:13
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-27 15:09";
+    const VERSION = "2026-03-27 15:13";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode' && !k.startsWith('annot')) {
@@ -4651,6 +4651,7 @@
   function activateAnnotation(id){
     deactivateAll();
     annotSidebarOpen();
+    renderPanel();  // 确保当前 Tab 的 annotation 卡片在 DOM 里
     const mark = document.querySelector(`.annot-mark[data-annot-id="${id}"]`);
     if(mark){ mark.classList.add('active'); }
     const item = document.getElementById('ai-' + id);
