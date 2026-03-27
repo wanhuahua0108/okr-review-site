@@ -205,11 +205,13 @@
     .feat-risk    { background: var(--s2-bg); --feat-sc: var(--s2); --badge-bg: #fee2e2; --badge-c: #991b1b; }
     .feat-good    { background: var(--s3-bg); --feat-sc: var(--s3); --badge-bg: #d1fae5; --badge-c: #065f46; }
     .feat-holding { background: #f1f5f9; --feat-sc: #64748b; --badge-bg: #e2e8f0; --badge-c: #475569; }
+    .feat-wip     { background: #fdf2f8; --feat-sc: #be185d; --badge-bg: #fce7f3; --badge-c: #be185d; }
     @media (prefers-color-scheme: dark) {
       .feat-ok      { --badge-bg: #1e3a8a; --badge-c: #93c5fd; }
       .feat-risk    { --badge-bg: #7f1d1d; --badge-c: #fca5a5; }
       .feat-good    { --badge-bg: #064e3b; --badge-c: #6ee7b7; }
       .feat-holding { background: #1e293b; --feat-sc: #94a3b8; --badge-bg: #334155; --badge-c: #cbd5e1; }
+      .feat-wip     { background: #4a0020; --feat-sc: #f9a8d4; --badge-bg: #831843; --badge-c: #fbcfe8; }
     }
     .feat-header { display: flex; align-items: center; gap: 8px; }
     .feat-name { font-size: 0.95rem; font-weight: 700; color: var(--feat-sc); }
@@ -309,7 +311,7 @@
     <p>会议日期：2026-03</p>
   </div>
   <div class="header-meta" style="display:flex;align-items:center;gap:12px;">
-    <span>生成于 2026-03-27 13:57</span>
+    <span>生成于 2026-03-27 14:03</span>
     
   </div>
 </header>
@@ -791,6 +793,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="凌云" data-quarter="2026Q1">
@@ -1199,6 +1202,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="音频TA" data-quarter="2026Q1">
@@ -1576,6 +1580,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="音频QA" data-quarter="2026Q1">
@@ -1933,6 +1938,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="麦芬" data-quarter="2026Q1">
@@ -2153,14 +2159,14 @@
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
         
         
-        <div class="feat-card feat-good edit-scope">
+        <div class="feat-card feat-wip edit-scope">
           <div class="feat-header">
             <span style="font-size:1rem;" contenteditable="false"
                   data-key="2026Q1_火炬_ficon_1">⚔️</span>
             <span class="feat-name" contenteditable="false"
                   data-key="2026Q1_火炬_fname_1">赛季内容制作</span>
             <span class="feat-badge" contenteditable="false"
-                  data-key="2026Q1_火炬_fbadge_1">已完成</span>
+                  data-key="2026Q1_火炬_fbadge_1">制作中</span>
           </div>
           <div class="feat-headline" contenteditable="false"
                data-key="2026Q1_火炬_fh_赛季内容制作">赛季需求按需交付，优化内容如期完成</div>
@@ -2295,12 +2301,13 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="火炬" data-quarter="2026Q1">
               <td class="tbl-td">
                 <span contenteditable="false" data-key="2026Q1_火炬_tstat_1"
-                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#dbeafe;color:#1e40af;">已完成</span>
+                      style="padding:2px 8px;border-radius:10px;font-size:0.78rem;font-weight:600;background:#fce7f3;color:#be185d;">制作中</span>
               </td>
               <td class="tbl-td" style="font-weight:600;">
                 <span contenteditable="false" data-key="2026Q1_火炬_tname_1">赛季内容制作</span>
@@ -2753,6 +2760,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="小镇" data-quarter="2026Q1">
@@ -3191,6 +3199,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="铃兰" data-quarter="2026Q1">
@@ -3551,6 +3560,7 @@
             
             
             
+            
               
             
             <tr class="tbl-row" data-person="伊瑟" data-quarter="2026Q1">
@@ -3900,6 +3910,7 @@
             </tr>
           </thead>
           <tbody>
+            
             
             
             
@@ -4285,14 +4296,14 @@
 
 
 <footer class="footer">
-  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 13:57
+  音频团队 2026Q1 OKR Review · 生成于 2026-03-27 14:03
   
 </footer>
 
 <script>
   // 版本检查：数据更新后自动清除旧的 localStorage 编辑内容
   (function() {
-    const VERSION = "2026-03-27 13:57";
+    const VERSION = "2026-03-27 14:03";
     if (localStorage.getItem('__data_version') !== VERSION) {
       Object.keys(localStorage).forEach(k => {
         if (k !== '__data_version' && k !== 'activeTab' && k !== 'editorMode' && !k.startsWith('annot')) {
